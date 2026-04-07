@@ -104,9 +104,6 @@ const Footer: React.FC = () => {
           <p className="text-slate-400">
             © 2024 NovaTrust Chits & Finance Private Limited. All rights reserved.
           </p>
-          <p className="text-slate-500 text-sm mt-2">
-            Registered under Chit Funds Act, 1982 | License No: [Your License Number]
-          </p>
         </div>
       </div>
     </footer>
