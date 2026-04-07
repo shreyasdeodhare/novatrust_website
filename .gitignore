@@ -1,1 +1,20 @@
 node_modules
+
+# Development scripts
+run.bat
+run.sh
+
+# System files
+*.stackdump
+*.exe.stackdump
+bash.exe.stackdump
+
+# Build output
+build/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
