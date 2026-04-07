@@ -1,8 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Replace with your Supabase URL and anon key
-const supabaseUrl = 'https://your-supabase-url.supabase.co';
-const supabaseAnonKey = 'your-supabase-anon-key';
+// Get Supabase URL and key from environment variables
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://your-supabase-url.supabase.co';
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your-supabase-anon-key';
+
+if (!process.env.REACT_APP_SUPABASE_URL || !process.env.REACT_APP_SUPABASE_ANON_KEY) {
+  console.warn('Supabase environment variables not set. Using placeholder values.');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 

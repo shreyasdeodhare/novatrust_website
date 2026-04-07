@@ -17,10 +17,14 @@ const ContactPage: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
-    // EmailJS configuration - Replace with your actual values
-    const serviceId = 'your_service_id'; // Replace with your EmailJS service ID
-    const templateId = 'your_template_id'; // Replace with your EmailJS template ID
-    const publicKey = 'your_public_key'; // Replace with your EmailJS public key
+    // EmailJS configuration - Get from environment variables
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key';
+
+    if (!process.env.REACT_APP_EMAILJS_SERVICE_ID || !process.env.REACT_APP_EMAILJS_TEMPLATE_ID || !process.env.REACT_APP_EMAILJS_PUBLIC_KEY) {
+      console.warn('EmailJS environment variables not set. Using placeholder values.');
+    }
 
     const templateParams = {
       from_name: form.name,
