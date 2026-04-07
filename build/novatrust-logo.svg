@@ -1,0 +1,24 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#1a365d" stroke="url(#goldGradient)" stroke-width="2"/>
+  
+  <!-- Decorative border -->
+  <circle cx="50" cy="50" r="40" fill="none" stroke="url(#goldGradient)" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Central N letter -->
+  <text x="50" y="65" font-family="serif" font-size="48" font-weight="bold" fill="url(#goldGradient)" text-anchor="middle">N</text>
+  
+  <!-- Decorative elements -->
+  <path d="M20 30 Q30 20 40 30 Q30 40 20 30" fill="url(#goldGradient)" opacity="0.7"/>
+  <path d="M80 30 Q70 20 60 30 Q70 40 80 30" fill="url(#goldGradient)" opacity="0.7"/>
+  <path d="M20 70 Q30 80 40 70 Q30 60 20 70" fill="url(#goldGradient)" opacity="0.7"/>
+  <path d="M80 70 Q70 80 60 70 Q70 60 80 70" fill="url(#goldGradient)" opacity="0.7"/>
+</svg>

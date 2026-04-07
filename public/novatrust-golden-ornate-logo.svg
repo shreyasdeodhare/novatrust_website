@@ -1,0 +1,66 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="darkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8860B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B7355;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Dark background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1a365d" stroke="url(#goldGradient)" stroke-width="3"/>
+  
+  <!-- Ornate decorative border elements -->
+  <!-- Top ornament -->
+  <path d="M100 20 Q90 10 85 15 Q95 25 100 20 Q105 25 115 15 Q110 10 100 20" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M100 25 L95 35 Q100 30 105 35 Z" fill="url(#goldGradient)"/>
+  
+  <!-- Left ornaments -->
+  <path d="M30 70 Q20 65 25 60 Q35 70 30 70 Q35 75 25 85 Q20 80 30 70" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M25 100 Q15 95 20 90 Q30 100 25 100 Q30 105 20 115 Q15 110 25 100" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M30 130 Q20 125 25 120 Q35 130 30 130 Q35 135 25 145 Q20 140 30 130" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  
+  <!-- Right ornaments -->
+  <path d="M170 70 Q180 65 175 60 Q165 70 170 70 Q165 75 175 85 Q180 80 170 70" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M175 100 Q185 95 180 90 Q170 100 175 100 Q170 105 180 115 Q185 110 175 100" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M170 130 Q180 125 175 120 Q165 130 170 130 Q165 135 175 145 Q180 140 170 130" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  
+  <!-- Bottom ornament -->
+  <path d="M100 180 Q90 190 85 185 Q95 175 100 180 Q105 175 115 185 Q110 190 100 180" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  <path d="M100 175 L95 165 Q100 170 105 165 Z" fill="url(#goldGradient)"/>
+  
+  <!-- Connecting swirls and flourishes -->
+  <!-- Top left to top right -->
+  <path d="M60 40 Q80 30 100 35 Q120 30 140 40" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
+  <path d="M60 45 Q70 35 80 45 Q70 55 60 45" fill="url(#goldGradient)" opacity="0.7"/>
+  <path d="M140 45 Q130 35 120 45 Q130 55 140 45" fill="url(#goldGradient)" opacity="0.7"/>
+  
+  <!-- Bottom left to bottom right -->
+  <path d="M60 160 Q80 170 100 165 Q120 170 140 160" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
+  <path d="M60 155 Q70 165 80 155 Q70 145 60 155" fill="url(#goldGradient)" opacity="0.7"/>
+  <path d="M140 155 Q130 165 120 155 Q130 145 140 155" fill="url(#goldGradient)" opacity="0.7"/>
+  
+  <!-- Side swirls -->
+  <path d="M50 80 Q40 90 50 100 Q40 110 50 120" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
+  <path d="M150 80 Q160 90 150 100 Q160 110 150 120" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
+  
+  <!-- Central letter N -->
+  <text x="100" y="125" font-family="serif" font-size="70" font-weight="bold" fill="url(#goldGradient)" text-anchor="middle" filter="url(#shadow)">N</text>
+  
+  <!-- Inner decorative circle -->
+  <circle cx="100" cy="100" r="55" fill="none" stroke="url(#goldGradient)" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Small decorative dots -->
+  <circle cx="75" cy="75" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="125" cy="75" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="75" cy="125" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="125" cy="125" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+</svg>

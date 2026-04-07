@@ -1,0 +1,638 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations for catchy theme */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-strong {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply custom animations */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+.animate-pulse-strong {
+  animation: pulse-strong 1.5s infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Gradient text animations */
+.gradient-text-animate {
+  background: linear-gradient(45deg, #8b5cf6, #ec4899, #f43f5e, #8b5cf6);
+  background-size: 300% 300%;
+  animation: shimmer 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Neon glow effect */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+}
+
+.neon-glow:hover {
+  box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+}
+
+/* Sparkle effect */
+.sparkle {
+  position: relative;
+}
+
+.sparkle::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  animation: bounce-slow 2s infinite;
+}
+
+/* Rainbow border animation */
+.rainbow-border {
+  background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff);
+  background-size: 400% 400%;
+  animation: shimmer 3s ease infinite;
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.rainbow-border > * {
+  background: white;
+  border-radius: calc(1rem - 2px);
+}
+
+/* Floating elements */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-delay-1 {
+  animation-delay: 1s;
+}
+
+.floating-delay-2 {
+  animation-delay: 2s;
+}
+
+.floating-delay-3 {
+  animation-delay: 3s;
+}
+
+/* Magnetic hover effect */
+.magnetic {
+  transition: transform 0.3s ease;
+}
+
+.magnetic:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Gradient background animation */
+.gradient-bg-animate {
+  background: linear-gradient(-45deg, #8b5cf6, #ec4899, #f43f5e, #f97316, #8b5cf6);
+  background-size: 400% 400%;
+  animation: shimmer 15s ease infinite;
+}
+
+/* Text reveal animation */
+.text-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Button pulse effect */
+.btn-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-pulse::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-pulse:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Card flip effect */
+.card-flip {
+  perspective: 1000px;
+}
+
+.card-flip-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-flip:hover .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* Loading spinner */
+.spinner {
+  border: 4px solid rgba(147, 51, 234, 0.1);
+  border-left: 4px solid #8b5cf6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: rotate-slow 1s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #8b5cf6, #ec4899);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #7c3aed, #db2777);
+}
+
+@layer base {
+  html {
+    @apply font-roboto;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+  }
+
+  /* Material Design Typography */
+  h1, .h1 {
+    @apply text-6xl font-light tracking-tight;
+  }
+
+  h2, .h2 {
+    @apply text-5xl font-light tracking-tight;
+  }
+
+  h3, .h3 {
+    @apply text-4xl font-normal;
+  }
+
+  h4, .h4 {
+    @apply text-3xl font-normal;
+  }
+
+  h5, .h5 {
+    @apply text-2xl font-normal;
+  }
+
+  h6, .h6 {
+    @apply text-xl font-medium;
+  }
+
+  .subtitle1 {
+    @apply text-base font-normal;
+  }
+
+  .subtitle2 {
+    @apply text-sm font-medium;
+  }
+
+  .body1 {
+    @apply text-base font-normal;
+  }
+
+  .body2 {
+    @apply text-sm font-normal;
+  }
+
+  .button {
+    @apply text-sm font-medium uppercase;
+  }
+
+  .caption {
+    @apply text-xs font-normal;
+  }
+
+  .overline {
+    @apply text-xs font-medium uppercase tracking-wider;
+  }
+}
+
+@layer components {
+  /* Material Design Button Styles */
+  .btn-material {
+    @apply relative overflow-hidden inline-flex items-center justify-center px-4 py-2 rounded font-medium text-sm transition-all duration-300 focus:outline-none;
+  }
+
+  .btn-material-contained {
+    @apply btn-material text-white shadow-md hover:shadow-lg;
+  }
+
+  .btn-material-contained-primary {
+    @apply btn-material-contained bg-primary-500 hover:bg-primary-600;
+  }
+
+  .btn-material-contained-secondary {
+    @apply btn-material-contained bg-secondary-500 hover:bg-secondary-600;
+  }
+
+  .btn-material-outlined {
+    @apply btn-material border-2 bg-transparent;
+  }
+
+  .btn-material-outlined-primary {
+    @apply btn-material-outlined border-primary-500 text-primary-500 hover:bg-primary-50;
+  }
+
+  /* Legacy classes for backward compatibility */
+  .btn {
+    @apply btn-material-contained-primary;
+  }
+
+  .btn-primary {
+    @apply btn-material-contained-primary;
+  }
+
+  .btn-secondary {
+    @apply btn-material-contained-secondary;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 btn-material-contained;
+  }
+
+  .btn-outline {
+    @apply btn-material-outlined-primary;
+  }
+
+  .input {
+    @apply form-input;
+  }
+
+  .material-card {
+    @apply bg-white rounded shadow-md transition-shadow duration-300;
+  }
+
+  .material-card:hover {
+    @apply shadow-lg;
+  }
+
+  .card {
+    @apply material-card;
+  }
+
+  .form-group {
+    @apply mb-6;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-neutral-700 mb-1;
+  }
+
+  .form-error {
+    @apply text-error-500 text-sm mt-1;
+  }
+
+  /* Material transitions */
+  .ease-material {
+    @apply ease-in-out;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 ease-material;
+  }
+
+  /* Material Chips */
+  .material-chip {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .material-chip-primary {
+    @apply material-chip bg-primary-100 text-primary-800;
+  }
+
+  .material-chip-secondary {
+    @apply material-chip bg-secondary-100 text-secondary-800;
+  }
+
+  .material-chip-success {
+    @apply material-chip bg-success-100 text-success-800;
+  }
+
+  .material-chip-warning {
+    @apply material-chip bg-warning-100 text-warning-800;
+  }
+
+  .material-chip-error {
+    @apply material-chip bg-error-100 text-error-800;
+  }
+
+  /* Legacy badge classes */
+  .badge {
+    @apply material-chip;
+  }
+
+  .badge-primary {
+    @apply material-chip-primary;
+  }
+
+  .badge-secondary {
+    @apply material-chip-secondary;
+  }
+
+  .badge-success {
+    @apply material-chip-success;
+  }
+
+  .badge-danger {
+    @apply material-chip-error;
+  }
+
+  .badge-warning {
+    @apply material-chip-warning;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .section-title {
+    @apply text-center mb-12;
+  }
+
+  .section-title h2 {
+    @apply h2 mb-4 text-neutral-900;
+  }
+
+  .section-title p {
+    @apply subtitle1 text-neutral-600 max-w-3xl mx-auto;
+  }
+
+  /* Dashboard specific components */
+  .dashboard-card {
+    @apply material-card p-6;
+  }
+
+  .dashboard-card-header {
+    @apply flex justify-between items-center mb-4;
+  }
+
+  .dashboard-card-title {
+    @apply h6 text-neutral-900;
+  }
+
+  .dashboard-stat {
+    @apply flex flex-col;
+  }
+
+  .dashboard-stat-value {
+    @apply h4 text-neutral-900;
+  }
+
+  .dashboard-stat-label {
+    @apply caption text-neutral-500;
+  }
+
+  /* Material Progress */
+  .material-progress-linear {
+    @apply h-1 w-full overflow-hidden bg-primary-100;
+  }
+
+  .material-progress-linear-value {
+    @apply h-full bg-primary-500 transition-all duration-300;
+  }
+
+  .material-progress-circular {
+    @apply animate-spin rounded-full border-4 border-neutral-200;
+  }
+
+  .material-progress-circular-primary {
+    @apply material-progress-circular border-t-primary-500;
+  }
+
+  .material-progress-circular-secondary {
+    @apply material-progress-circular border-t-secondary-500;
+  }
+
+  /* Legacy progress classes */
+  .progress-bar {
+    @apply material-progress-linear;
+  }
+
+  .progress-bar-fill {
+    @apply material-progress-linear-value;
+  }
+
+  /* Material Design specific components */
+  .material-grid {
+    @apply grid gap-6;
+  }
+
+  .material-grid-cols-1 {
+    @apply material-grid grid-cols-1;
+  }
+
+  .material-grid-cols-2 {
+    @apply material-grid grid-cols-1 md:grid-cols-2;
+  }
+
+  .material-grid-cols-3 {
+    @apply material-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .material-grid-cols-4 {
+    @apply material-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
+  }
+
+  /* Material Design specific layouts */
+  .material-page {
+    @apply min-h-screen bg-neutral-50 flex flex-col;
+  }
+
+  .material-page-content {
+    @apply flex-1 p-6;
+  }
+
+  .material-page-container {
+    @apply container mx-auto;
+  }
+
+  .material-page-header {
+    @apply mb-6;
+  }
+
+  .material-page-title {
+    @apply h4 text-neutral-900 mb-2;
+  }
+
+  .material-page-subtitle {
+    @apply subtitle2 text-neutral-600;
+  }
+
+  /* Material Design specific dashboard */
+  .material-dashboard {
+    @apply material-page;
+  }
+
+  .material-dashboard-content {
+    @apply material-page-content;
+  }
+
+  .material-dashboard-grid {
+    @apply material-grid-cols-4;
+  }
+
+  .material-dashboard-card {
+    @apply dashboard-card;
+  }
+
+  .material-dashboard-stat-card {
+    @apply dashboard-stat-card;
+  }
+
+  .material-dashboard-chart-card {
+    @apply dashboard-chart-container;
+  }
+}
