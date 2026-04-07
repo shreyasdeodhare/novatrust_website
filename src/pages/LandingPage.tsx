@@ -181,12 +181,12 @@ const LandingPage: React.FC = () => {
             </div>
           
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
-              NovaTrust Chits & Finance Private Limited
+              NovaTrust Chits Private Limited
             </h1>
             <p className="text-2xl mb-8 opacity-90">Your trusted partner for secure and transparent chit funds with live auctions!</p>
             <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/calculator" className="rainbow-border inline-flex">
-                <div className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                <Link to="/calculator" className="inline-flex">
+                <div className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border-2 border-blue-200">
                   Try Calculator
                 </div>
               </Link>
@@ -210,7 +210,7 @@ const LandingPage: React.FC = () => {
       <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center max-w-4xl">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">Welcome to NovaTrust</h2>
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed">NovaTrust Chits & Finance is committed to providing a safe, transparent, and rewarding chit fund experience. Our mission is to help you save, grow, and achieve your financial goals with ease and trust.</p>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed">NovaTrust Chits is committed to providing a safe, transparent, and rewarding chit fund experience. Our mission is to help you save, grow, and achieve your financial goals with ease and trust.</p>
           <div className="bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 shadow-xl border border-blue-100">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="About Us" className="mx-auto w-32 h-32 object-cover rounded-full shadow-xl mb-6 ring-4 ring-blue-200" />
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-4">Empowering Your Financial Journey</h3>
@@ -556,9 +556,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Live Auction Section */}
-      <section id="auction" className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
+      <section id="auction" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-6">🎯 Live Auction</h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">🎯 Live Auction</h2>
           <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
             Experience transparent and exciting live chit fund auctions with real-time bidding.
             Our auctions are conducted fairly with complete transparency and secure payment processing.
@@ -578,12 +578,12 @@ const LandingPage: React.FC = () => {
       {/* Features Section */}
       <section id="features" className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-12">Why Choose Us?</h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12">Why Choose Us?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
             {features.map((f, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 rounded-3xl p-8 flex flex-col items-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-purple-100">
+              <div key={idx} className="bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 flex flex-col items-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-blue-100">
                 <div className="text-6xl mb-6 transform hover:scale-110 transition-transform duration-300">{f.icon}</div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-4">{f.title}</h3>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-4">{f.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{f.desc}</p>
               </div>
             ))}
@@ -593,34 +593,34 @@ const LandingPage: React.FC = () => {
 
       {/* Terms and Conditions Section */}
       {showTerms && (
-        <section id="terms" className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
+        <section id="terms" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
-              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-purple-100">
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-blue-100">
                 <div className="px-8 py-10">
                   <p className="font-bold text-lg text-gray-700 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-6">Novatrust Chits & Finance Private Ltd Rules</h3>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">Novatrust Chits Private Ltd Rules</h3>
                   <div className="space-y-6">
                     <ol className="list-decimal pl-6 space-y-3 text-gray-700 leading-relaxed">
-                      <li>To become a member or a guarantor in Novatrust Chits & Finance Private Ltd, one must be at least 20 years old.</li>
+                      <li>To become a member or a guarantor in Novatrust Chits Private Ltd, one must be at least 20 years old.</li>
                       <li>A person who wants to join the group must submit a photo, Aadhaar card, ration card, and PAN card, and can join by paying an advance amount of ₹1000.</li>
                       <li>A member can hold any number of tickets in a single group.</li>
-                      <li>Members who join the chit group will be issued a registered Form No. 8 agreement for the chit value by Novatrust Chits & Finance Private Ltd, as per the 1982 Chit Fund Act.</li>
-                      <li>Before the group begins, Novatrust Chits & Finance Private Ltd provides a list of 20 individuals registered with the government to the group members through both online and offline methods.</li>
-                      <li>Novatrust Chits & Finance Private Ltd provides group members with a receipt for the fixed deposit made as collateral in the name of the group for its security, as per the Chit Fund Act, 1982.</li>
-                      <li>Novatrust Chits & Finance Private Ltd will operate the group only after providing the required security to the registrar and obtaining approval from the joint chit registrar.</li>
+                      <li>Members who join the chit group will be issued a registered Form No. 8 agreement for the chit value by Novatrust Chits Private Ltd, as per the 1982 Chit Fund Act.</li>
+                      <li>Before the group begins, Novatrust Chits Private Ltd provides a list of 20 individuals registered with the government to the group members through both online and offline methods.</li>
+                      <li>Novatrust Chits Private Ltd provides group members with a receipt for the fixed deposit made as collateral in the name of the group for its security, as per the Chit Fund Act, 1982.</li>
+                      <li>Novatrust Chits Private Ltd will operate the group only after providing the required security to the registrar and obtaining approval from the joint chit registrar.</li>
                       <li>The installment amount must be paid one day before the chit date. Those who do so will be given a bonus ranging from ₹100 to ₹150.</li>
                       <li>Members must collect a receipt immediately after paying their installment. If they claim to have paid without a receipt, the company will not be held responsible.</li>
                       <li>If a chit group member wishes to receive the chit amount within six months, they must inform the company before joining the group. If they wish to receive it after seven months, they must give at least one month's prior notice.</li>
                       <li>New members joining the chit group must have a minimum CIBIL score of 550.</li>
-                      <li>To receive the chit amount, two guarantors are required: (A) a Novatrust Chits & Finance Private Ltd chit group member and (B) a government employee. The documents of both the member and the guarantors must be of the same type.</li>
+                      <li>To receive the chit amount, two guarantors are required: (A) a Novatrust Chits Private Ltd chit group member and (B) a government employee. The documents of both the member and the guarantors must be of the same type.</li>
                       <li>A member receiving the chit amount who provides the required deposit or registers a mortgage for the remaining months does not need to submit any additional documents or guarantees.</li>
                       <li>Members who wish to receive the chit amount after 12 months must provide some form of guarantee. For those receiving it after 15 months, submitting their own documents will be sufficient.</li>
                       <li>The member who is going to receive the chit amount can get the amount on the very next day after completing the required security procedures for the remaining monthly installments.</li>
-                      <li>Novatrust Chits & Finance Private Ltd members can avail insurance for their chit value. The premium will be 1% of the chit value, and this offer is applicable to individuals between 20 and 50 years of age.</li>
+                      <li>Novatrust Chits Private Ltd members can avail insurance for their chit value. The premium will be 1% of the chit value, and this offer is applicable to individuals between 20 and 50 years of age.</li>
                       <li>The foreman commission is 5% of the chit amount, and this commission is included in the monthly installment.</li>
-                      <li>Novatrust Chits & Finance Private Ltd charges commission on the chit value of individual members, but does not charge commission on the total amount of the chit group.</li>
+                      <li>Novatrust Chits Private Ltd charges commission on the chit value of individual members, but does not charge commission on the total amount of the chit group.</li>
                       <li>The foreman commission and service charges cover the subscriber's investment security fee, government registration stamp duty, online service charges for daily and monthly installment payments, agreement fee for chit amount disbursement, and 24/7 website-based account statement maintenance service charges.</li>
                       <li>Documents to be submitted by the auction winning customer: Proof of ID, Proof of Address, Proof of Income, Detailed documents of own house and 3 bank cheque for security will be mandatory. Also 2 guarantors will be required and their documents will be the same.</li>
                       <li>If a member delays the payment of their pending chit installment within  15 days from the chit date, a 3% penalty must be paid. Similarly, if the delay extends to next 1days, a 2% penalty or interest will be charged.</li>
@@ -633,7 +633,7 @@ const LandingPage: React.FC = () => {
                       <li>If a member who has taken the chit amount fails to pay their pending dues for more than two months, legal action will be taken under the 1982 Chit Fund Act. The concerned subscriber and guarantors will be responsible for bearing all legal expenses.</li>
                       <li>After the chit group ends, the subscriber can collect all their related documents.</li>
                       <li>The company will not disclose any subscriber's transactions to any other person without the consent of the concerned subscriber.</li>
-                      <li>All guarantees accepted by the Novatrust Chits & Finance Private Ltd management must be in written form only.</li>
+                      <li>All guarantees accepted by the Novatrust Chits Private Ltd management must be in written form only.</li>
                     </ol>
                   </div>
                   <div className="text-center mt-8">
@@ -649,9 +649,9 @@ const LandingPage: React.FC = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-12 text-center">Contact Us</h2>
-          <div className="max-w-3xl mx-auto mb-12 text-center bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 rounded-3xl p-8 shadow-xl border border-purple-100 flex flex-col items-center justify-center">
-            <p className="text-2xl text-gray-700 mb-4 font-semibold">NovaTrust Chits & Finance Pvt Ltd</p>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Contact Us</h2>
+          <div className="max-w-3xl mx-auto mb-12 text-center bg-gradient-to-r from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 shadow-xl border border-blue-100 flex flex-col items-center justify-center">
+            <p className="text-2xl text-gray-700 mb-4 font-semibold">NovaTrust Chits Pvt Ltd</p>
             <div className="flex flex-col items-center space-y-2">
               <p className="text-lg text-gray-600 flex items-center"><span className="mr-2">📞</span> <span className="font-bold">7755996577</span></p>
               <p className="text-lg text-gray-600 flex items-center"><span className="mr-2">✉️</span> <span className="font-bold">info@novatrust.co.in</span></p>
@@ -668,7 +668,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-3xl font-bold text-neutral-900 mb-4">Thank You!</h3>
                 <p className="text-lg text-neutral-600 mb-8">Your message has been sent successfully. We'll get back to you as soon as possible.</p>
-                <button onClick={() => setSubmitted(false)} className="px-8 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white rounded-xl hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl">Send Another Message</button>
+                <button onClick={() => setSubmitted(false)} className="px-8 py-3 bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white rounded-xl hover:from-blue-700 hover:via-cyan-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl">Send Another Message</button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-3xl shadow-2xl p-8 border border-purple-100">
@@ -692,7 +692,7 @@ const LandingPage: React.FC = () => {
                     <textarea id="message" name="message" rows={6} required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-base sm:text-lg transition-all duration-300" placeholder="Your message" value={formData.message} onChange={handleChange}></textarea>
                 </div>
                 <div>
-                  <button type="submit" className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white font-bold py-4 px-6 rounded-xl hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl" disabled={loading}>{loading ? 'Sending...' : 'Send Message'}</button>
+                  <button type="submit" className="w-full bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-700 hover:via-cyan-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl" disabled={loading}>{loading ? 'Sending...' : 'Send Message'}</button>
                 </div>
                 {/* Terms link below submit button */}
                 <div className="text-center mt-4">

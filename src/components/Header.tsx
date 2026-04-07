@@ -18,7 +18,7 @@ const Header: React.FC = () => {
         <Link to="/" className="flex items-center gap-3">
           <div className="relative w-12 h-12">
             <img
-              src={`${process.env.PUBLIC_URL}/novatrust-golden-ornate-logo.svg`}
+              src="/novatrust-golden-ornate-logo.svg"
               alt="NovaTrust Logo"
               className="w-full h-full object-contain rounded-full shadow-lg ring-2 ring-slate-200"
               onError={(e) => {
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
           </div>
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-slate-500">NovaTrust</p>
-            <h1 className="text-lg font-bold text-slate-900">Chits & Finance</h1>
+            <h1 className="text-lg font-bold text-slate-900">Chits</h1>
           </div>
         </Link>
 

@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ title = 'Dashboard', user }) => {
             <p className="text-sm font-medium text-gray-800">{user?.name || 'User'}</p>
             <p className="text-xs text-gray-500">{user?.email || 'user@example.com'}</p>
           </div>
-          <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">
             {user?.name?.charAt(0) || 'U'}
           </div>
         </div>

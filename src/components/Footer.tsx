@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur-lg opacity-30"></div>
                 <img
-                  src={`${process.env.PUBLIC_URL}/novatrust-golden-ornate-logo.svg`}
+                  src="/novatrust-golden-ornate-logo.svg"
                   alt="NovaTrust Logo"
                   className="relative w-10 h-10 object-contain shadow-xl ring-2 ring-yellow-300"
                   onError={(e) => {
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <h3 className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">NovaTrust Chits & Finance</h3>
+              <h3 className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">NovaTrust Chits</h3>
             </div>
             <p className="text-slate-300 mb-4 leading-relaxed">
               Your trusted partner for secure and transparent chit funds. Building financial futures with integrity and innovation.
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
                 href="https://instagram.com/novatrustchits"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-300 hover:text-pink-400 transition-colors duration-300 hover:scale-110 transform"
+                className="text-slate-300 hover:text-cyan-400 transition-colors duration-300 hover:scale-110 transform"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.017 0C8.396 0 7.996.014 6.79.067 5.59.12 4.694.287 3.94.54c-.82.277-1.518.64-2.207 1.33C.64 2.56.277 3.26 0 4.08c-.253.754-.42 1.65-.473 2.85C-.04 8.136 0 8.536 0 12.157c0 3.62-.014 4.02-.067 5.226-.053 1.2-.22 2.096-.473 2.85-.277.82-.64 1.518-1.33 2.207C.56 23.36 1.26 23.723 2.08 24c.754.253 1.65.42 2.85.473C7.864 24.04 8.264 24 11.885 24c3.62 0 4.02-.014 5.226-.067 1.2-.053 2.096-.22 2.85-.473.82-.277 1.518-.64 2.207-1.33.69-.69 1.053-1.39 1.33-2.207.253-.754.42-1.65.473-2.85.053-1.206.067-1.606.067-5.227 0-3.62.014-4.02.067-5.226.053-1.2.22-2.096.473-2.85.277-.82.64-1.518 1.33-2.207C23.36.64 22.66.277 21.84 0c-.754-.253-1.65-.42-2.85-.473C16.136-.04 15.736 0 12.115 0h-.098zM11.885 2.15c3.546 0 3.966.014 5.366.08 1.327.063 2.054.283 2.526.47.608.24 1.04.527 1.494.98.453.454.74.886.98 1.494.187.472.407 1.2.47 2.526.066 1.4.08 1.82.08 5.366 0 3.546-.014 3.966-.08 5.366-.063 1.327-.283 2.054-.47 2.526-.24.608-.527 1.04-.98 1.494-.454.453-.886.74-1.494.98-.472.187-1.2.407-2.526.47-1.4.066-1.82.08-5.366.08-3.546 0-3.966-.014-5.366-.08-1.327-.063-2.054-.283-2.526-.47-.608-.24-1.04-.527-1.494-.98-.453-.454-.74-.886-.98-1.494-.187-.472-.407-1.2-.47-2.526-.066-1.4-.08-1.82-.08-5.366 0-3.546.014-3.966.08-5.366.063-1.327.283-2.054.47-2.526.24-.608.527-1.04.98-1.494.454-.453.886-.74 1.494-.98.472-.187 1.2-.407 2.526-.47 1.4-.066 1.82-.08 5.366-.08z"/>
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-slate-700 mt-8 pt-8 text-center">
           <p className="text-slate-400">
-            © 2024 NovaTrust Chits & Finance Private Limited. All rights reserved.
+            © 2024 NovaTrust Chits Private Limited. All rights reserved.
           </p>
         </div>
       </div>
