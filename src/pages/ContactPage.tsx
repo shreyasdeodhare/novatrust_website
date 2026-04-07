@@ -21,6 +21,7 @@ const ContactPage: React.FC = () => {
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
     const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
     const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key';
+    const toEmail = process.env.REACT_APP_CONTACT_EMAIL || 'kartik.lahot03@gmail.com';
 
     if (!process.env.REACT_APP_EMAILJS_SERVICE_ID || !process.env.REACT_APP_EMAILJS_TEMPLATE_ID || !process.env.REACT_APP_EMAILJS_PUBLIC_KEY) {
       console.warn('EmailJS environment variables not set. Using placeholder values.');
@@ -31,7 +32,7 @@ const ContactPage: React.FC = () => {
       from_email: form.email,
       subject: form.subject,
       message: form.message,
-      to_email: 'kartik.lahot03@gmail.com'
+      to_email: toEmail
     };
 
     emailjs.send(serviceId, templateId, templateParams, publicKey)
