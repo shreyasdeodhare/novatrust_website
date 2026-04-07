@@ -81,6 +81,7 @@ const LandingPage: React.FC = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [calculatorResults, setCalculatorResults] = useState({
     totalFundValue: '',
     totalInvestment: '',
