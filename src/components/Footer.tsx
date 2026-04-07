@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur-lg opacity-30"></div>
                 <img
-                  src="/novatrust-golden-ornate-logo.svg"
+                  src={`${process.env.PUBLIC_URL}/novatrust-golden-ornate-logo.svg`}
                   alt="NovaTrust Logo"
                   className="relative w-10 h-10 object-contain shadow-xl ring-2 ring-yellow-300"
                   onError={(e) => {

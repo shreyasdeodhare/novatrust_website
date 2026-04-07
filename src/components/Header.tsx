@@ -8,9 +8,13 @@ const Header: React.FC = () => {
         <Link to="/" className="flex items-center gap-3">
           <div className="relative w-12 h-12">
             <img
-              src="/novatrust-golden-ornate-logo.svg"
+              src={`${process.env.PUBLIC_URL}/novatrust-golden-ornate-logo.svg`}
               alt="NovaTrust Logo"
               className="w-full h-full object-contain rounded-full shadow-lg ring-2 ring-slate-200"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/novatrust-logo.svg';
+              }}
             />
           </div>
           <div>
