@@ -62,7 +62,6 @@ const Header: React.FC = () => {
           <Link to="/calculator" onClick={handleLinkClick} className="text-slate-600 hover:text-blue-600 transition">Calculator</Link>
           <Link to="/live-auction" onClick={handleLinkClick} className="text-slate-600 hover:text-blue-600 transition">Live Auction</Link>
           <Link to="/benefits" onClick={handleLinkClick} className="text-slate-600 hover:text-blue-600 transition">Benefits</Link>
-          <Link to="/legal" onClick={handleLinkClick} className="text-slate-600 hover:text-blue-600 transition">Legal</Link>
           <Link to="/terms" onClick={handleLinkClick} className="text-slate-600 hover:text-blue-600 transition">Terms</Link>
           <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-lg hover:from-blue-700 hover:to-emerald-700 transition">Contact</Link>
         </nav>
@@ -76,7 +75,6 @@ const Header: React.FC = () => {
           <Link to="/calculator" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Calculator</Link>
           <Link to="/live-auction" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Live Auction</Link>
           <Link to="/benefits" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Benefits</Link>
-          <Link to="/legal" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Legal</Link>
           <Link to="/terms" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Terms</Link>
           <Link to="/contact" onClick={handleLinkClick} className="block rounded-full bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg hover:from-blue-700 hover:to-emerald-700 transition">Contact</Link>
         </div>

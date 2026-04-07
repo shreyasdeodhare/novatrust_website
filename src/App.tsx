@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LandingPage from './pages/LandingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutChitFundsPage from './pages/AboutChitFundsPage';
-import LegalPage from './pages/LegalPage';
 import SchemesPage from './pages/SchemesPage';
 import CalculatorPage from './pages/CalculatorPage';
 import ContactPage from './pages/ContactPage';
@@ -31,7 +30,6 @@ const App: React.FC = () => {
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/live-auction" element={<LiveAuctionPage />} />
           <Route path="/benefits" element={<BenefitsPage />} />
-          <Route path="/legal" element={<LegalPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/terms" element={<TermsPage />} />
         

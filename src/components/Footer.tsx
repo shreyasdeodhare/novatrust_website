@@ -89,10 +89,9 @@ const Footer: React.FC = () => {
 
           {/* Legal & Support */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-blue-300">Legal & Support</h4>
+            <h4 className="text-lg font-semibold mb-4 text-blue-300">Support</h4>
             <ul className="space-y-2">
               <li><Link to="/benefits" className="text-slate-300 hover:text-white transition-colors duration-300">Benefits</Link></li>
-              <li><Link to="/legal" className="text-slate-300 hover:text-white transition-colors duration-300">Legal</Link></li>
               <li><Link to="/terms" className="text-slate-300 hover:text-white transition-colors duration-300">Terms & Conditions</Link></li>
               <li><Link to="/contact" className="text-slate-300 hover:text-white transition-colors duration-300">Contact Us</Link></li>
               <li><a href="mailto:kartik.lahot03@gmail.com" className="text-slate-300 hover:text-white transition-colors duration-300">Email Support</a></li>
