@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const publicUrl = process.env.PUBLIC_URL || '';
+  const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -18,13 +20,9 @@ const Header: React.FC = () => {
         <Link to="/" className="flex items-center gap-3">
           <div className="relative w-12 h-12">
             <img
-              src="/novatruatfinal.jpg"
+              src={logoSrc}
               alt="NovaTrust Logo"
               className="w-full h-full object-contain rounded-full shadow-lg ring-2 ring-slate-200"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = '/novatrust-final-logo.svg';
-              }}
             />
           </div>
           <div>

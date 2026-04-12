@@ -212,7 +212,7 @@ const LandingPage: React.FC = () => {
             >
               <div className="w-full min-h-[520px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-12 py-10">
                 <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                  <div className="inline-block glass rounded-full px-6 py-2 mb-4">
+                  <div className="inline-block rounded-full px-6 py-2 mb-4 bg-slate-950/35 border border-white/20 text-white">
                     <span className="text-sm font-semibold">🚀 Most Trusted Chit Fund Platform</span>
                   </div>
                   
@@ -237,7 +237,7 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <img src={slide.image} alt={slide.title} className="rounded-3xl shadow-2xl w-full max-w-md object-cover border-4 border-blue-200" />
+                  <img src={slide.image} alt={slide.title} className="rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] w-full max-w-md object-cover border-4 border-white/30 ring-1 ring-white/10" />
                 </div>
               </div>
             </div>

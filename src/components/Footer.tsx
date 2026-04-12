@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const publicUrl = process.env.PUBLIC_URL || '';
+  const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
+
   return (
     <footer className="bg-gradient-to-r from-indigo-950 via-purple-900 to-amber-700 text-white py-12">
       <div className="w-full px-4">
@@ -12,30 +15,10 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-lg opacity-30"></div>
                 <img
-                  src="/novatruatfinal.jpg"
+                  src={logoSrc}
                   alt="NovaTrust Logo"
                   className="relative w-10 h-10 object-contain shadow-xl ring-2 ring-amber-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const fallback = target.nextSibling as HTMLElement;
-                    if (fallback) fallback.style.display = 'flex';
-                  }}
                 />
-                <div className="relative w-10 h-10 rounded-full bg-gradient-to-r from-indigo-700 to-purple-700 flex items-center justify-center text-white font-bold text-sm shadow-xl ring-2 ring-amber-300" style={{display: 'none'}}>
-                  <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="32" cy="32" r="30" fill="url(#gradient)"/>
-                    <path d="M16 32 C16 24 22 20 28 20 C34 20 40 24 40 32 C40 40 34 44 28 44 C22 44 16 40 16 32 Z M48 32 C48 24 42 20 36 20 C30 20 24 24 24 32 C24 40 30 44 36 44 C42 44 48 40 48 32 Z" fill="#ffecd2" opacity="0.9"/>
-                    <path d="M32 32 Q36 28 40 32 Q44 36 40 40 Q36 44 32 40 Q28 36 32 32" fill="none" stroke="#ffd89b" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
-                    <path d="M32 24 L36 32 L32 40 L28 32 Z" fill="#ffd89b" opacity="0.9"/>
-                    <defs>
-                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#667eea"/>
-                        <stop offset="100%" stop-color="#764ba2"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
               </div>
               <h3 className="ml-2 text-xl font-bold bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">NovaTrust Chits</h3>
             </div>
