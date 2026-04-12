@@ -198,6 +198,47 @@
   transition: transform 0.3s ease;
 }
 
+:root {
+  --brand-indigo: #4338ca;
+  --brand-violet: #7c3aed;
+  --brand-gold: #f59e0b;
+  --brand-gold-dark: #d97706;
+  --brand-surface: #eef2ff;
+}
+
+body {
+  background: radial-gradient(circle at top left, rgba(67,56,202,0.12), transparent 25%),
+              radial-gradient(circle at bottom right, rgba(245,158,11,0.10), transparent 20%),
+              #f8fafc;
+}
+
+.btn-brand {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-slate-950 shadow-xl transition-all duration-300;
+  background-image: linear-gradient(90deg, #f59e0b 0%, #fbbf24 45%, #fde68a 100%);
+}
+.btn-brand:hover {
+  transform: translateY(-2px);
+}
+
+.text-brand-heading {
+  background: linear-gradient(90deg, #4338ca, #7c3aed, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-brand-surface {
+  background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 45%, #fff7ed 100%);
+}
+
+.glass-brand {
+  background: rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
 .magnetic:hover {
   transform: scale(1.05) rotate(2deg);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -62,6 +62,7 @@ const features = [
 ];
 
 const LandingPage: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -77,7 +78,13 @@ const LandingPage: React.FC = () => {
     totalInvestment: '',
     netProfit: '',
     roiPercentage: '',
-    monthlyDividend: ''
+    monthlyDividend: '',
+    // New calculator fields
+    monthSalary: 50000,
+    emi: 5000,
+    surplusIncome: 45000,
+    tenure: 60,
+    calculatorType: 'income'
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -91,9 +98,40 @@ const LandingPage: React.FC = () => {
   });
   const [showTerms, setShowTerms] = useState(false);
 
+  const heroSlides = [
+    {
+      title: "Fuel Your Business With NovaTrust Chits",
+      subtitle: "Expand and diversify your business with convenient access to funds",
+      description: "Pay online and grow your business with our hassle-free borrowing solutions.",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80",
+      cta: "Get Started"
+    },
+    {
+      title: "NovaTrust Chits For Hassle-Free Borrowing",
+      subtitle: "See your dreams take shape tomorrow",
+      description: "Bid for the prize money and get instant funds when you need them.",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      cta: "Join Now"
+    },
+    {
+      title: "Compulsory Saving & Investment With NovaTrust Chits",
+      subtitle: "Smart saving for a happy future",
+      description: "Your investment works early for you with our secure chit fund schemes.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      cta: "Start Saving"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroSlides.length]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: name.includes('Salary') || name.includes('emi') || name.includes('surplus') || name.includes('tenure') ? parseInt(value) : value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,44 +158,32 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  // Calculator function
-  const calculateChitFund = () => {
-    const monthly = parseInt(formData.monthlyContribution) || 0;
-    const duration = parseInt(formData.duration) || 0;
-    const bidAmount = parseInt(formData.bidAmount) || 0;
-    const winMonth = parseInt(formData.winMonth) || 0;
+  // New calculator function based on Muthoot
+  const calculateNewChitFund = () => {
+    const { emi, surplusIncome, tenure, calculatorType } = formData;
+    
+    let applicableEMI = 0;
+    let maxChitValue = 0;
 
-    // Validation
-    if (!monthly || !duration || !bidAmount || !winMonth) {
-      alert('Please fill in all fields with valid numbers');
-      return;
+    if (calculatorType === 'income') {
+      // Income based: EMI = (Surplus Income * Tenure) / (Tenure + 1) or similar logic
+      // Simplified calculation
+      applicableEMI = Math.round(surplusIncome / 2); // Rough estimate
+      maxChitValue = applicableEMI * tenure;
+    } else if (calculatorType === 'instalment') {
+      // Instalment based
+      applicableEMI = emi;
+      maxChitValue = emi * tenure;
+    } else if (calculatorType === 'amount') {
+      // Amount based - need to adjust
+      maxChitValue = surplusIncome * 10; // Rough
+      applicableEMI = Math.round(maxChitValue / tenure);
     }
 
-    if (winMonth > duration) {
-      alert('Win month cannot be greater than duration');
-      return;
-    }
-
-    if (bidAmount > monthly * duration) {
-      alert('Bid amount cannot be greater than total fund value');
-      return;
-    }
-
-    // Calculate values
-    const totalFundValue = monthly * duration;
-    const totalInvestment = monthly * winMonth;
-    const netProfit = bidAmount - totalInvestment;
-    const roiPercentage = totalInvestment > 0 ? ((netProfit / totalInvestment) * 100).toFixed(2) : '0';
-    const remainingMonths = duration - winMonth;
-    const monthlyDividend = remainingMonths > 0 ? Math.round((totalFundValue - bidAmount) / remainingMonths) : 0;
-
-    // Update calculator results
-    setCalculatorResults({
-      totalFundValue: totalFundValue.toLocaleString(),
-      totalInvestment: totalInvestment.toLocaleString(),
-      netProfit: netProfit.toLocaleString(),
-      roiPercentage: roiPercentage,
-      monthlyDividend: monthlyDividend.toLocaleString()
+    setFormData({
+      ...formData,
+      totalFundValue: maxChitValue.toLocaleString(),
+      monthlyContribution: applicableEMI.toString()
     });
   };
 
@@ -168,85 +194,190 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-gradient-to-br from-blue-50 via-cyan-50 via-emerald-50 to-teal-50 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col font-sans bg-brand-surface relative overflow-hidden">
       <Header />
-      {/* Hero Section */}
-      <section id="hero" className="bg-gradient-to-br from-blue-600 via-cyan-600 to-emerald-600 text-white py-20 md:py-32 relative overflow-hidden">
+      {/* Hero Carousel Section */}
+      <section id="hero" className="relative overflow-hidden min-h-[520px] py-20 lg:py-28 bg-slate-950">
         <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-emerald-600/20"></div>
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <div className="inline-block glass rounded-full px-6 py-2 mb-4">
-              <span className="text-sm font-semibold">🚀 Most Trusted Chit Fund Platform</span>
-            </div>
-          
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
-              NovaTrust Chits Private Limited
-            </h1>
-            <p className="text-2xl mb-8 opacity-90">Your trusted partner for secure and transparent chit funds with live auctions!</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/calculator" className="inline-flex">
-                <div className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border-2 border-blue-200">
-                  Try Calculator
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/90 via-slate-950/60 to-amber-600/20"></div>
+        
+        {/* Carousel Container */}
+        <div className="relative max-w-7xl mx-auto px-4 min-h-[520px]">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <div className="w-full min-h-[520px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-12 py-10">
+                <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                  <div className="inline-block glass rounded-full px-6 py-2 mb-4">
+                    <span className="text-sm font-semibold">🚀 Most Trusted Chit Fund Platform</span>
+                  </div>
+                  
+                  <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">
+                    {slide.title}
+                  </h1>
+                  <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">
+                    {slide.subtitle}
+                  </h2>
+                  <p className="text-xl mb-8 opacity-90">{slide.description}</p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link to="/calculator" className="inline-flex">
+                      <div className="bg-white text-indigo-900 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        {slide.cta}
+                      </div>
+                    </Link>
+                    <Link to="/live-auction" className="inline-flex">
+                      <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 px-8 py-4 rounded-full font-bold shadow-xl hover:from-amber-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        Join Live Auction
+                      </div>
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-              <Link to="/live-auction" className="inline-flex">
-                <div className="bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:from-cyan-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-                  Join Live Auction
+                <div className="md:w-1/2 flex justify-center">
+                  <img src={slide.image} alt={slide.title} className="rounded-3xl shadow-2xl w-full max-w-md object-cover border-4 border-blue-200" />
                 </div>
-              </Link>
+              </div>
             </div>
-            <div className="mt-8 flex justify-center md:justify-start">
-            
-            </div>
-          </div>
-          <div className="md:w-1/2 flex justify-center">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80" alt="NovaTrust Finance and Trust" className="rounded-3xl shadow-2xl w-full max-w-md object-cover border-4 border-blue-200" />
-          </div>
+          ))}
         </div>
+        
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide ? 'bg-amber-400' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+        
+        {/* Navigation Arrows */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-all"
+        >
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-all"
+        >
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </section>
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">Welcome to NovaTrust</h2>
+        <div className="w-full px-4 text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-6">Welcome to NovaTrust</h2>
           <p className="text-xl text-gray-700 mb-8 leading-relaxed">NovaTrust Chits is committed to providing a safe, transparent, and rewarding chit fund experience. Our mission is to help you save, grow, and achieve your financial goals with ease and trust.</p>
-          <div className="bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 shadow-xl border border-blue-100">
+          <div className="bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 rounded-3xl p-8 shadow-xl border border-indigo-100">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="About Us" className="mx-auto w-32 h-32 object-cover rounded-full shadow-xl mb-6 ring-4 ring-blue-200" />
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-4">Empowering Your Financial Journey</h3>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-4">Empowering Your Financial Journey</h3>
             <p className="text-lg text-gray-600">Join our community of satisfied members who have achieved their financial dreams through our transparent chit fund schemes.</p>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section id="benefits" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">✨ Benefits of NovaTrust</h2>
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="w-full px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">🔄 How NovaTrust Chits Work</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-3xl">1️⃣</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Join a Group</h3>
+                <p className="text-gray-600">Become a member of a chit fund group with 20 members contributing monthly.</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-3xl">2️⃣</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Monthly Contributions</h3>
+                <p className="text-gray-600">Pay your monthly installment along with other members to build the fund.</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-3xl">3️⃣</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Monthly Auction</h3>
+                <p className="text-gray-600">Participate in transparent auctions to win the prize money each month.</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-3xl">4️⃣</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Receive Dividends</h3>
+                <p className="text-gray-600">Earn monthly dividends on your contributions until the group completes.</p>
+              </div>
+            </div>
+            
+            <div className="mt-12 bg-white rounded-3xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold text-center mb-6">The Chit Cycle Process</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-4 bg-blue-50 rounded-xl">
+                  <h4 className="font-bold text-blue-800 mb-2">Pooling</h4>
+                  <p className="text-sm text-gray-600">20 members contribute monthly to create the chit amount.</p>
+                </div>
+                <div className="text-center p-4 bg-green-50 rounded-xl">
+                  <h4 className="font-bold text-green-800 mb-2">Auction</h4>
+                  <p className="text-sm text-gray-600">One member wins through bidding, taking a discount.</p>
+                </div>
+                <div className="text-center p-4 bg-purple-50 rounded-xl">
+                  <h4 className="font-bold text-purple-800 mb-2">Distribution</h4>
+                  <p className="text-sm text-gray-600">Prize money distributed, dividends paid to remaining members.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section id="benefits" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="w-full px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">✨ Benefits of NovaTrust</h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {/* Benefit Cards */}
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">💰</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">Lowest Intermediation Cost</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Lowest Intermediation Cost</h3>
               <p className="text-gray-700 text-center text-sm">Cost of intermediation is the lowest in the industry, maximizing your returns.</p>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">🏆</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">Tax Free Dividend</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Tax Free Dividend</h3>
               <p className="text-gray-700 text-center text-sm">Enjoy tax-free dividends on your chit fund investments.</p>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">🚀</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">Easy Accessibility</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Easy Accessibility</h3>
               <p className="text-gray-700 text-center text-sm">Access your funds and manage your investments with utmost ease.</p>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">📈</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">No Interest Hikes</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">No Interest Hikes</h3>
               <p className="text-gray-700 text-center text-sm">No periodic interest hikes - your rates remain stable and predictable.</p>
             </div>
 
@@ -254,9 +385,9 @@ const LandingPage: React.FC = () => {
 
             
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">⚡</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">Better Than Banks</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Better Than Banks</h3>
               <p className="text-gray-700 text-center text-sm">Chit funds are easier, simpler, faster and cheaper than bank borrowing.</p>
             </div>
           </div>
@@ -264,33 +395,33 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Why Invest with Us Section */}
-      <section id="why-invest" className="py-20 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-12 text-center">🌟 Why Invest with Us?</h2>
+      <section id="why-invest" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="w-full px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">🌟 Why Invest with Us?</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {/* Why Invest Cards */}
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">🕐</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Round-the-Clock Support</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Round-the-Clock Support</h3>
               <p className="text-gray-700 text-center text-sm">Customers can obtain their payments at any time with round-the-clock services.</p>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">📅</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Flexible Payments</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Flexible Payments</h3>
               <p className="text-gray-700 text-center text-sm">Pay your chit amount on daily , weekly basis or monthly basis as per your convenience.</p>
             </div>
  
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">🛡️</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">100% Money Guarantee</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">100% Money Guarantee</h3>
               <p className="text-gray-700 text-center text-sm">Complete guarantee for customers' money with full security.</p>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">👁️</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Transparent Verification</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Transparent Verification</h3>
               <p className="text-gray-700 text-center text-sm">Internal customers can verify company payments to chit winners.</p>
             </div>
 
@@ -298,9 +429,9 @@ const LandingPage: React.FC = () => {
 
             
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group">
               <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">📝</div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Hassle-Free Documentation</h3>
+              <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Hassle-Free Documentation</h3>
               <p className="text-gray-700 text-center text-sm">Minimal documentation requirements for a smooth experience.</p>
             </div>
           </div>
@@ -309,7 +440,7 @@ const LandingPage: React.FC = () => {
 
       {/* Schemes Section */}
       <section id="schemes" className="py-20 bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50">
-        <div className="container mx-auto px-4">
+        <div className="px-4">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Our Chit Fund Schemes</h2>
           
           {/* Schemes Table */}
@@ -393,117 +524,186 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Calculator Section */}
-      <section id="calculator" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">🧮 Chit Fund Calculator</h2>
+      <section id="calculator" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">🧮 NovaTrust Chit Calculators</h2>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-blue-100">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-indigo-100">
               <div className="px-8 py-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                {/* Calculator Type Tabs */}
+                <div className="flex justify-center mb-8">
+                  <div className="flex space-x-2 bg-gray-100 p-1 rounded-xl">
+                    <button
+                      onClick={() => setFormData({...formData, calculatorType: 'income'})}
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        formData.calculatorType === 'income' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      Income Based
+                    </button>
+                    <button
+                      onClick={() => setFormData({...formData, calculatorType: 'instalment'})}
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        formData.calculatorType === 'instalment' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      Instalment Based
+                    </button>
+                    <button
+                      onClick={() => setFormData({...formData, calculatorType: 'amount'})}
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        formData.calculatorType === 'amount' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      Amount Based
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Input Section */}
                   <div className="space-y-6">
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-6">📊 Enter Details</h3>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-6">📊 Enter Your Details</h3>
+                    
+                    {formData.calculatorType === 'income' && (
+                      <>
+                        <div>
+                          <label className="block text-gray-700 font-semibold mb-2">💰 Month Salary (₹)</label>
+                          <input
+                            type="range"
+                            name="monthSalary"
+                            min="10000"
+                            max="200000"
+                            step="5000"
+                            value={formData.monthSalary}
+                            onChange={handleChange}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                          <div className="text-center mt-2">
+                            <span className="text-lg font-bold text-indigo-600">₹{formData.monthSalary.toLocaleString()}</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-semibold mb-2">💸 EMI / Commitments (₹)</label>
+                          <input
+                            type="range"
+                            name="emi"
+                            min="0"
+                            max="50000"
+                            step="1000"
+                            value={formData.emi}
+                            onChange={handleChange}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                          <div className="text-center mt-2">
+                            <span className="text-lg font-bold text-indigo-600">₹{formData.emi.toLocaleString()}</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-semibold mb-2">📈 Surplus Income (₹)</label>
+                          <input
+                            type="range"
+                            name="surplusIncome"
+                            min="0"
+                            max="100000"
+                            step="5000"
+                            value={formData.surplusIncome}
+                            onChange={handleChange}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                          <div className="text-center mt-2">
+                            <span className="text-lg font-bold text-indigo-600">₹{formData.surplusIncome.toLocaleString()}</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    
+                    {formData.calculatorType === 'instalment' && (
+                      <>
+                        <div>
+                          <label className="block text-gray-700 font-semibold mb-2">💰 Monthly Instalment (₹)</label>
+                          <input
+                            type="range"
+                            name="monthlyContribution"
+                            min="1000"
+                            max="50000"
+                            step="1000"
+                            value={formData.monthlyContribution}
+                            onChange={handleChange}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                          <div className="text-center mt-2">
+                            <span className="text-lg font-bold text-indigo-600">₹{formData.monthlyContribution.toLocaleString()}</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    
+                    {formData.calculatorType === 'amount' && (
+                      <>
+                        <div>
+                          <label className="block text-gray-700 font-semibold mb-2">🎯 Desired Chit Amount (₹)</label>
+                          <input
+                            type="range"
+                            name="totalFundValue"
+                            min="50000"
+                            max="1000000"
+                            step="25000"
+                            value={formData.totalFundValue}
+                            onChange={handleChange}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                          <div className="text-center mt-2">
+                            <span className="text-lg font-bold text-indigo-600">₹{formData.totalFundValue.toLocaleString()}</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
                     
                     <div>
-                      <label className="block text-gray-700 font-semibold mb-2">💰 Monthly Contribution (₹)</label>
-                      <input 
-                        type="number" 
-                        name="monthlyContribution"
-                        value={formData.monthlyContribution || ''} 
+                      <label className="block text-gray-700 font-semibold mb-2">⏰ Tenure (Months)</label>
+                      <input
+                        type="range"
+                        name="tenure"
+                        min="12"
+                        max="120"
+                        step="6"
+                        value={formData.tenure}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-lg"
-                        placeholder="e.g., 5000"
-                        min="0"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                       />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-gray-700 font-semibold mb-2">⏰ Duration (Months)</label>
-                      <input 
-                        type="number" 
-                        name="duration"
-                        value={formData.duration || ''} 
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-lg"
-                        placeholder="e.g., 20"
-                        min="1"
-                        max="100"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-gray-700 font-semibold mb-2">🎯 Expected Bid Amount (₹)</label>
-                      <input 
-                        type="number" 
-                        name="bidAmount"
-                        value={formData.bidAmount || ''} 
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-lg"
-                        placeholder="e.g., 80000"
-                        min="0"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-gray-700 font-semibold mb-2">📅 Month to Win Auction</label>
-                      <input 
-                        type="number" 
-                        name="winMonth"
-                        value={formData.winMonth || ''} 
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-lg"
-                        placeholder="e.g., 10"
-                        min="1"
-                        max="100"
-                      />
+                      <div className="text-center mt-2">
+                        <span className="text-lg font-bold text-indigo-600">{formData.tenure} months</span>
+                      </div>
                     </div>
                     
                     <button 
-                      onClick={calculateChitFund}
-                      className="w-full bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-pulse text-lg"
+                      onClick={calculateNewChitFund}
+                      className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-pulse text-lg"
                     >
-                      🧮 Calculate Returns
+                      🧮 Calculate
                     </button>
                   </div>
                   
                   {/* Results Section */}
                   <div className="space-y-6">
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-6">📈 Results</h3>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-6">📈 Results</h3>
                     
                     <div className="space-y-4">
                       <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-all duration-300">
-                        <div className="text-sm text-gray-600 mb-1">💰 Total Fund Value</div>
+                        <div className="text-sm text-gray-600 mb-1">💰 Applicable Chits EMI Value</div>
                         <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                          ₹{formData.totalFundValue || '0'}
+                          ₹{formData.monthlyContribution || '0'}
                         </div>
                       </div>
                       
                       <div className="bg-gradient-to-r from-cyan-50 to-emerald-50 p-4 rounded-xl border border-cyan-200 hover:shadow-lg transition-all duration-300">
-                        <div className="text-sm text-gray-600 mb-1">💸 Total Investment</div>
+                        <div className="text-sm text-gray-600 mb-1">🎯 MAX Chit Value</div>
                         <div className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-emerald-600 bg-clip-text text-transparent">
-                          ₹{formData.totalInvestment || '0'}
-                        </div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-4 rounded-xl border border-emerald-200 hover:shadow-lg transition-all duration-300">
-                        <div className="text-sm text-gray-600 mb-1">📊 Net Profit/Loss</div>
-                        <div className={`text-2xl font-bold ${parseInt(formData.netProfit || '0') >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
-                          ₹{formData.netProfit || '0'}
-                        </div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-all duration-300">
-                        <div className="text-sm text-gray-600 mb-1">📈 ROI Percentage</div>
-                        <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                          {formData.roiPercentage || '0'}%
-                        </div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-r from-emerald-50 to-cyan-50 p-4 rounded-xl border border-emerald-200 hover:shadow-lg transition-all duration-300">
-                        <div className="text-sm text-gray-600 mb-1">🎁 Monthly Dividend</div>
-                        <div className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
-                          ₹{formData.monthlyDividend || '0'}
+                          ₹{formData.totalFundValue || '0'}
                         </div>
                       </div>
                     </div>
@@ -512,11 +712,10 @@ const LandingPage: React.FC = () => {
                     <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-4 rounded-xl border border-blue-200">
                       <h4 className="font-bold text-gray-800 mb-2">💡 How it works:</h4>
                       <ul className="text-gray-600 text-sm space-y-1">
-                        <li>• Total Fund Value = Monthly Contribution × Duration</li>
-                        <li>• Total Investment = Monthly Contribution × Win Month</li>
-                        <li>• Net Profit = Bid Amount - Total Investment</li>
-                        <li>• ROI = (Net Profit ÷ Total Investment) × 100</li>
-                        <li>• Monthly Dividend = (Total Fund Value - Bid Amount) ÷ Remaining Months</li>
+                        <li>• EMI is calculated based on your income and commitments</li>
+                        <li>• Max Chit Value = EMI × Tenure</li>
+                        <li>• Choose a plan that fits your financial capacity</li>
+                        <li>• Contact us for personalized chit fund recommendations</li>
                       </ul>
                     </div>
                   </div>
@@ -528,27 +727,27 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Additional Services Section */}
-      <section id="services" className="py-20 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-12 text-center">🚀 NovaTrust Loan Services</h2>
+      <section id="services" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="w-full px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">🚀 NovaTrust Loan Services</h2>
           <p className="text-xl text-center text-gray-700 mb-10 max-w-2xl mx-auto">Unlock your dreams with our range of modern loan services, tailored for every stage of life. Fast, transparent, and customer-first!</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Home Loan & Mortgage Loan */}
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-emerald-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🏠</div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Home & Mortgage Loan</h3>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Home & Mortgage Loan</h3>
               <p className="text-gray-700 text-center text-base">Make your dream home a reality with flexible, low-interest home and mortgage loans. Quick approval, minimal paperwork, and expert guidance every step of the way.</p>
             </div>
             {/* Car Loan */}
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-cyan-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🚗</div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent mb-3 text-center">Car Loan</h3>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Car Loan</h3>
               <p className="text-gray-700 text-center text-base">Drive your dreams with our easy and affordable car loans. Enjoy fast disbursal, attractive rates, and a hassle-free process for new or used vehicles.</p>
             </div>
             {/* Education Loan */}
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-indigo-100 hover:scale-105 transition-all duration-300 hover:shadow-2xl group flex flex-col items-center">
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🎓</div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3 text-center">Education Loan</h3>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-3 text-center">Education Loan</h3>
               <p className="text-gray-700 text-center text-base">Invest in your future with our education loans. Cover tuition, living expenses, and more with flexible repayment options and expert support for students and parents.</p>
             </div>
           </div>
@@ -556,10 +755,10 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Live Auction Section */}
-      <section id="auction" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">🎯 Live Auction</h2>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+      <section id="auction" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+        <div className="w-full px-4 text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-6">🎯 Live Auction</h2>
+          <p className="text-xl text-gray-700 mb-8 max-w-2xl">
             Experience transparent and exciting live chit fund auctions with real-time bidding.
             Our auctions are conducted fairly with complete transparency and secure payment processing.
           </p>
@@ -577,13 +776,13 @@ const LandingPage: React.FC = () => {
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12">Why Choose Us?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="w-full px-4 text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-12">Why Choose Us?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((f, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 flex flex-col items-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-blue-100">
+              <div key={idx} className="bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 rounded-3xl p-8 flex flex-col items-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-indigo-100">
                 <div className="text-6xl mb-6 transform hover:scale-110 transition-transform duration-300">{f.icon}</div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-4">{f.title}</h3>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-4">{f.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{f.desc}</p>
               </div>
             ))}
@@ -593,14 +792,14 @@ const LandingPage: React.FC = () => {
 
       {/* Terms and Conditions Section */}
       {showTerms && (
-        <section id="terms" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
-          <div className="container mx-auto px-4">
+        <section id="terms" className="py-20 bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50">
+          <div className="px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
-              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-blue-100">
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-indigo-100">
                 <div className="px-8 py-10">
                   <p className="font-bold text-lg text-gray-700 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-6">Novatrust Chits Private Ltd Rules</h3>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-6">Novatrust Chits Private Ltd Rules</h3>
                   <div className="space-y-6">
                     <ol className="list-decimal pl-6 space-y-3 text-gray-700 leading-relaxed">
                       <li>To become a member or a guarantor in Novatrust Chits Private Ltd, one must be at least 20 years old.</li>
@@ -637,7 +836,7 @@ const LandingPage: React.FC = () => {
                     </ol>
                   </div>
                   <div className="text-center mt-8">
-                    <button onClick={() => setShowTerms(false)} className="text-blue-600 underline hover:text-emerald-600 font-semibold transition-colors duration-300">Hide Terms</button>
+                    <button onClick={() => setShowTerms(false)} className="text-amber-600 underline hover:text-amber-700 font-semibold transition-colors duration-300">Hide Terms</button>
                   </div>
                 </div>
               </div>
@@ -648,9 +847,9 @@ const LandingPage: React.FC = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Contact Us</h2>
-          <div className="max-w-3xl mx-auto mb-12 text-center bg-gradient-to-r from-blue-50 via-cyan-50 to-emerald-50 rounded-3xl p-8 shadow-xl border border-blue-100 flex flex-col items-center justify-center">
+        <div className="w-full px-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-500 bg-clip-text text-transparent mb-12 text-center">Contact Us</h2>
+          <div className="max-w-3xl mx-auto mb-12 text-center bg-gradient-to-r from-indigo-50 via-violet-50 to-amber-50 rounded-3xl p-8 shadow-xl border border-indigo-100 flex flex-col items-center justify-center">
             <p className="text-2xl text-gray-700 mb-4 font-semibold">NovaTrust Chits Pvt Ltd</p>
             <div className="flex flex-col items-center space-y-2">
               <p className="text-lg text-gray-600 flex items-center"><span className="mr-2">📞</span> <span className="font-bold">7755996577</span></p>
@@ -668,7 +867,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-3xl font-bold text-neutral-900 mb-4">Thank You!</h3>
                 <p className="text-lg text-neutral-600 mb-8">Your message has been sent successfully. We'll get back to you as soon as possible.</p>
-                <button onClick={() => setSubmitted(false)} className="px-8 py-3 bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white rounded-xl hover:from-blue-700 hover:via-cyan-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl">Send Another Message</button>
+                <button onClick={() => setSubmitted(false)} className="px-8 py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 rounded-xl hover:from-amber-500 hover:to-yellow-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl">Send Another Message</button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-3xl shadow-2xl p-8 border border-purple-100">
@@ -692,11 +891,11 @@ const LandingPage: React.FC = () => {
                     <textarea id="message" name="message" rows={6} required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-base sm:text-lg transition-all duration-300" placeholder="Your message" value={formData.message} onChange={handleChange}></textarea>
                 </div>
                 <div>
-                  <button type="submit" className="w-full bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-700 hover:via-cyan-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl" disabled={loading}>{loading ? 'Sending...' : 'Send Message'}</button>
+                  <button type="submit" className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-bold py-4 px-6 rounded-xl hover:from-amber-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl" disabled={loading}>{loading ? 'Sending...' : 'Send Message'}</button>
                 </div>
                 {/* Terms link below submit button */}
                 <div className="text-center mt-4">
-                  <a href="#terms" className="text-blue-600 underline hover:text-emerald-600 font-semibold transition-colors duration-300" onClick={handleShowTerms}>Read Terms and Conditions</a>
+                  <a href="#terms" className="text-amber-600 underline hover:text-amber-700 font-semibold transition-colors duration-300" onClick={handleShowTerms}>Read Terms and Conditions</a>
                 </div>
               </form>
             )}

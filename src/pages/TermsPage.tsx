@@ -5,15 +5,15 @@ import Footer from '../components/Footer';
 
 const TermsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 pt-24 pb-20">
       <Header />
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="flex-1 w-full px-4 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Terms & Conditions</h1>
             <p className="text-lg text-slate-700 max-w-2xl">Clear terms and fair policies help members transact with confidence and transparency.</p>
           </div>
-          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition">
+          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-semibold shadow-lg hover:from-amber-500 hover:to-yellow-500 transition">
             Return Home
           </Link>
         </div>

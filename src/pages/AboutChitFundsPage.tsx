@@ -4,10 +4,10 @@ import Footer from '../components/Footer';
 
 const AboutChitFundsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 pt-24 pb-20">
       <Header />
-      <div className="container mx-auto px-4 max-w-6xl text-left">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-8 text-left">
+      <div className="flex-1 w-full px-4 max-w-7xl mx-auto text-left">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-8 text-left">
           About Chit Funds
         </h1>
 
@@ -34,8 +34,8 @@ const AboutChitFundsPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Roles in Chit Fund</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-bold text-blue-600 mb-2">Foreman (Organizer)</h3>
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <h3 className="font-bold text-indigo-700 mb-2">Foreman (Organizer)</h3>
               <p className="text-sm text-gray-700">Manages the fund, conducts auctions, ensures compliance, and handles administrative tasks.</p>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">

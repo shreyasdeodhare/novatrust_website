@@ -33,15 +33,15 @@ const schemes = [
 
 const SchemesPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 pt-24 pb-20">
       <Header />
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="flex-1 w-full px-4 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Chit Fund Schemes</h1>
             <p className="text-lg text-slate-700 max-w-2xl">Choose from our curated plans designed for safety, growth and guaranteed member benefits with transparent charges.</p>
           </div>
-          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition">
+          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-semibold shadow-lg hover:from-amber-500 hover:to-yellow-500 transition">
             Back to Home
           </Link>
         </div>
@@ -51,7 +51,7 @@ const SchemesPage: React.FC = () => {
             <div key={scheme.title} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl hover:-translate-y-1 transition-transform duration-300">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-bold text-slate-900">{scheme.title}</h2>
-                <span className="rounded-full bg-blue-100 px-4 py-2 text-blue-700 text-sm font-semibold">Popular</span>
+                <span className="rounded-full bg-indigo-100 px-4 py-2 text-indigo-700 text-sm font-semibold">Popular</span>
               </div>
               <p className="text-slate-600 leading-relaxed mb-6">{scheme.description}</p>
               <p className="text-sm font-semibold uppercase text-slate-500 tracking-wider">Plan details</p>

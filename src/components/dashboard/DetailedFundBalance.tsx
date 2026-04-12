@@ -17,9 +17,9 @@ const DetailedFundBalance: React.FC<DetailedFundBalanceProps> = ({ balance }) =>
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Detailed Fund Balance</h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-blue-50 rounded-lg p-4">
-          <p className="text-sm text-blue-600 mb-1">Total Contributed</p>
-          <p className="text-xl font-bold text-blue-900">₹{balance.total_contributed.toLocaleString()}</p>
+        <div className="bg-indigo-50 rounded-lg p-4">
+          <p className="text-sm text-indigo-700 mb-1">Total Contributed</p>
+          <p className="text-xl font-bold text-indigo-900">₹{balance.total_contributed.toLocaleString()}</p>
         </div>
         
         <div className="bg-green-50 rounded-lg p-4">
