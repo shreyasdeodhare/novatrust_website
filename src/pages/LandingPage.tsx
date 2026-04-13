@@ -202,7 +202,7 @@ const LandingPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/90 via-slate-950/60 to-amber-600/20"></div>
         
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto px-4 min-h-[520px]">
+        <div className="relative max-w-7xl mx-auto px-4 min-h-[520px] overflow-hidden">
           {heroSlides.map((slide, index) => (
             <div
               key={index}
