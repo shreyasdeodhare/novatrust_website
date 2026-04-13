@@ -12,12 +12,11 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-lg opacity-30"></div>
+              <div className="relative w-12 h-12 p-1 rounded-full bg-slate-950/70 shadow-xl ring-1 ring-white/25 overflow-hidden">
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="relative w-10 h-10 object-contain shadow-xl ring-2 ring-amber-300"
+                  className="relative w-full h-full object-cover rounded-full"
                 />
               </div>
               <h3 className="ml-2 text-xl font-bold bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">NovaTrust Chits</h3>

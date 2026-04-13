@@ -18,11 +18,11 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-950 via-purple-900 to-slate-950 text-white shadow-xl border-b border-indigo-800/40">
       <div className="w-full px-4 py-4 flex flex-wrap items-center justify-between gap-4 relative">
         <Link to="/" className="flex items-center gap-3">
-          <div className="relative w-12 h-12">
+          <div className="relative w-14 h-14 p-1 rounded-full bg-slate-950/70 shadow-xl ring-1 ring-white/25 overflow-hidden">
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="w-full h-full object-contain rounded-full shadow-lg ring-2 ring-slate-200"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
           <div>

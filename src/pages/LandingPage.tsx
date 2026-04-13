@@ -206,11 +206,11 @@ const LandingPage: React.FC = () => {
           {heroSlides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
+              className={`absolute inset-0 transition-opacity duration-1000 will-change-opacity ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <div className="w-full min-h-[520px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-12 py-10">
+              <div className="w-full min-h-[520px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-12 py-10 transform-gpu">
                 <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
                   <div className="inline-block rounded-full px-6 py-2 mb-4 bg-slate-950/35 border border-white/20 text-white">
                     <span className="text-sm font-semibold">🚀 Most Trusted Chit Fund Platform</span>
@@ -222,7 +222,7 @@ const LandingPage: React.FC = () => {
                   <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">
                     {slide.subtitle}
                   </h2>
-                  <p className="text-xl mb-8 opacity-90">{slide.description}</p>
+                  <p className="text-xl mb-8 opacity-90 text-white">{slide.description}</p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link to="/calculator" className="inline-flex">
                       <div className="bg-white text-indigo-900 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
@@ -237,7 +237,9 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <img src={slide.image} alt={slide.title} className="rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] w-full max-w-md object-cover border-4 border-white/30 ring-1 ring-white/10" />
+                  <div className="overflow-hidden rounded-3xl border-4 border-white/20 ring-1 ring-white/15 shadow-[0_30px_80px_rgba(0,0,0,0.35)] bg-slate-950">
+                    <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
+                  </div>
                 </div>
               </div>
             </div>
