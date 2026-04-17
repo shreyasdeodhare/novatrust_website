@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
 
   return (
-    <footer className="bg-gradient-to-r from-indigo-950 via-purple-900 to-amber-700 text-white py-12">
+    <footer className="bg-green-950 text-white py-12 border-t border-amber-500/20">
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
                   className="relative w-full h-full object-cover rounded-full"
                 />
               </div>
-              <h3 className="ml-2 text-xl font-bold bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">NovaTrust Chits</h3>
+              <h3 className="ml-2 text-xl font-bold text-amber-400 tracking-wider">NOVATRUST CHITS</h3>
             </div>
             <p className="text-slate-300 mb-4 leading-relaxed">
               Your trusted partner for secure and transparent chit funds. Building financial futures with integrity and innovation.
@@ -29,21 +29,21 @@ const Footer: React.FC = () => {
                 href="https://facebook.com/novatrustchits"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-300 hover:text-amber-200 transition-colors duration-300 hover:scale-110 transform"
+                className="hover:scale-110 transition-transform duration-300 shadow-sm rounded-full bg-white flex items-center justify-center w-8 h-8"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
+                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
               </a>
               <a
                 href="https://instagram.com/novatrustchits"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-300 hover:text-amber-200 transition-colors duration-300 hover:scale-110 transform"
+                className="hover:scale-110 transition-transform duration-300 shadow-sm rounded-md bg-white flex items-center justify-center overflow-hidden w-8 h-8 p-[5px]"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C8.396 0 7.996.014 6.79.067 5.59.12 4.694.287 3.94.54c-.82.277-1.518.64-2.207 1.33C.64 2.56.277 3.26 0 4.08c-.253.754-.42 1.65-.473 2.85C-.04 8.136 0 8.536 0 12.157c0 3.62-.014 4.02-.067 5.226-.053 1.2-.22 2.096-.473 2.85-.277.82-.64 1.518-1.33 2.207C.56 23.36 1.26 23.723 2.08 24c.754.253 1.65.42 2.85.473C7.864 24.04 8.264 24 11.885 24c3.62 0 4.02-.014 5.226-.067 1.2-.053 2.096-.22 2.85-.473.82-.277 1.518-.64 2.207-1.33.69-.69 1.053-1.39 1.33-2.207.253-.754.42-1.65.473-2.85.053-1.206.067-1.606.067-5.227 0-3.62.014-4.02.067-5.226.053-1.2.22-2.096.473-2.85.277-.82.64-1.518 1.33-2.207C23.36.64 22.66.277 21.84 0c-.754-.253-1.65-.42-2.85-.473C16.136-.04 15.736 0 12.115 0h-.098zM11.885 2.15c3.546 0 3.966.014 5.366.08 1.327.063 2.054.283 2.526.47.608.24 1.04.527 1.494.98.453.454.74.886.98 1.494.187.472.407 1.2.47 2.526.066 1.4.08 1.82.08 5.366 0 3.546-.014 3.966-.08 5.366-.063 1.327-.283 2.054-.47 2.526-.24.608-.527 1.04-.98 1.494-.454.453-.886.74-1.494.98-.472.187-1.2.407-2.526.47-1.4.066-1.82.08-5.366.08-3.546 0-3.966-.014-5.366-.08-1.327-.063-2.054-.283-2.526-.47-.608-.24-1.04-.527-1.494-.98-.453-.454-.74-.886-.98-1.494-.187-.472-.407-1.2-.47-2.526-.066-1.4-.08-1.82-.08-5.366 0-3.546.014-3.966.08-5.366.063-1.327.283-2.054.47-2.526.24-.608.527-1.04.98-1.494.454-.453.886-.74 1.494-.98.472-.187 1.2-.407 2.526-.47 1.4-.066 1.82-.08 5.366-.08z"/>
-                  <circle cx="12" cy="12" r="3.5"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+                  <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#f09433" /><stop offset="25%" stopColor="#e6683c" /><stop offset="50%" stopColor="#dc2743" /><stop offset="75%" stopColor="#cc2366" /><stop offset="100%" stopColor="#bc1888" /></linearGradient></defs>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
               <a
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
                 className="text-slate-300 hover:text-amber-200 transition-colors duration-300 hover:scale-110 transform"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </a>
             </div>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-blue-300">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-slate-300 hover:text-white transition-colors duration-300">Home</Link></li>
               <li><Link to="/about-chit-funds" className="text-slate-300 hover:text-white transition-colors duration-300">About Chit Funds</Link></li>
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
 
           {/* Legal & Support */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-blue-300">Support</h4>
+            <h4 className="text-lg font-semibold mb-4 text-amber-400">Support</h4>
             <ul className="space-y-2">
               <li><Link to="/benefits" className="text-slate-300 hover:text-white transition-colors duration-300">Benefits</Link></li>
               <li><Link to="/terms" className="text-slate-300 hover:text-white transition-colors duration-300">Terms & Conditions</Link></li>

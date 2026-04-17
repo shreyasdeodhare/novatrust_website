@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-950 via-purple-900 to-slate-950 text-white shadow-xl border-b border-indigo-800/40">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-green-950 text-white shadow-xl border-b border-green-900/40">
       <div className="w-full px-4 py-4 flex flex-wrap items-center justify-between gap-4 relative">
         <Link to="/" className="flex items-center gap-3">
           <div className="relative w-14 h-14 p-1 rounded-full bg-slate-950/70 shadow-xl ring-1 ring-white/25 overflow-hidden">
@@ -25,15 +25,15 @@ const Header: React.FC = () => {
               className="w-full h-full object-cover rounded-full"
             />
           </div>
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-200">NovaTrust</p>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 bg-clip-text text-transparent">Chits</h1>
+          <div className="flex flex-col items-start">
+            <span className="text-xl font-bold tracking-[0.2em] text-white leading-tight">NOVATRUST</span>
+            <span className="text-sm font-semibold text-amber-400 tracking-widest uppercase">Chits</span>
           </div>
         </Link>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-indigo-700/40 bg-slate-950/90 p-2 text-slate-100 shadow-sm transition hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 md:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-green-800/40 bg-green-950 p-2 text-slate-100 shadow-sm transition hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-amber-400 md:hidden"
           onClick={handleToggle}
           aria-expanded={isOpen}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
@@ -54,27 +54,27 @@ const Header: React.FC = () => {
         </button>
 
         <nav className="hidden md:flex flex-wrap items-center gap-6">
-          <Link to="/" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Home</Link>
-          <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">About</Link>
-          <Link to="/schemes" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Schemes</Link>
-          <Link to="/calculator" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Calculator</Link>
-          <Link to="/live-auction" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Live Auction</Link>
-          <Link to="/benefits" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Benefits</Link>
-          <Link to="/terms" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-300 transition">Terms</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 px-5 py-2 text-sm font-semibold text-slate-950 shadow-lg hover:from-amber-500 hover:to-yellow-500 transition">Contact</Link>
+          <Link to="/" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Home</Link>
+          <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">About</Link>
+          <Link to="/schemes" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Schemes</Link>
+          <Link to="/calculator" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Calculator</Link>
+          <Link to="/live-auction" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Live Auction</Link>
+          <Link to="/benefits" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Benefits</Link>
+          <Link to="/terms" onClick={handleLinkClick} className="text-slate-100 hover:text-amber-400 transition">Terms</Link>
+          <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-amber-400 px-5 py-2 text-sm font-semibold text-green-950 shadow-lg hover:bg-amber-500 transition">Contact</Link>
         </nav>
       </div>
 
-      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-slate-950/95 border-t border-indigo-800 shadow-lg`}>
+      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-green-950 border-t border-green-900 shadow-lg`}>
         <div className="w-full px-4 py-4 space-y-2">
-          <Link to="/" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-100 hover:bg-indigo-950 transition">Home</Link>
-          <Link to="/about-chit-funds" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">About</Link>
-          <Link to="/schemes" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Schemes</Link>
-          <Link to="/calculator" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Calculator</Link>
-          <Link to="/live-auction" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Live Auction</Link>
-          <Link to="/benefits" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Benefits</Link>
-          <Link to="/terms" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-700 hover:bg-slate-100 transition">Terms</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="block rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 px-5 py-3 text-center text-sm font-semibold text-slate-950 shadow-lg hover:from-amber-500 hover:to-yellow-500 transition">Contact</Link>
+          <Link to="/" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-slate-100 hover:bg-green-900 transition">Home</Link>
+          <Link to="/about-chit-funds" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">About</Link>
+          <Link to="/schemes" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">Schemes</Link>
+          <Link to="/calculator" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">Calculator</Link>
+          <Link to="/live-auction" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">Live Auction</Link>
+          <Link to="/benefits" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">Benefits</Link>
+          <Link to="/terms" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white hover:bg-green-900 transition">Terms</Link>
+          <Link to="/contact" onClick={handleLinkClick} className="block rounded-full bg-amber-400 px-5 py-3 text-center text-sm font-semibold text-green-950 shadow-lg hover:bg-amber-500 transition">Contact</Link>
         </div>
       </div>
     </header>
