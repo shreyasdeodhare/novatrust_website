@@ -87,7 +87,6 @@ const LandingPage: React.FC = () => {
     calculatorType: 'income'
   });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [calculatorResults, setCalculatorResults] = useState({
     totalFundValue: '',
@@ -99,46 +98,12 @@ const LandingPage: React.FC = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedScheme, setSelectedScheme] = useState('');
-  const [applyLoading, setApplyLoading] = useState(false);
 
   const openApplyModal = (schemeName: string) => {
     setSelectedScheme(schemeName);
     setIsApplyModalOpen(true);
   };
 
-  const handleApplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setApplyLoading(true);
-    const form = e.currentTarget;
-    const formValues = new FormData(form);
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@novatrust.co.in", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formValues.get('name'),
-          email: formValues.get('email'),
-          phone: formValues.get('phone'),
-          scheme: selectedScheme,
-          _subject: `New Chit Application for ${selectedScheme} from ${formValues.get('name')}`
-        })
-      });
-      if (response.ok) {
-        alert("Application sent successfully! We will contact you soon.");
-        setIsApplyModalOpen(false);
-        form.reset();
-      } else {
-        alert("Failed to send application. Please try again.");
-      }
-    } catch (error) {
-      alert("An error occurred. Please try again.");
-    } finally {
-      setApplyLoading(false);
-    }
-  };
 
   const heroSlides = [
     {
@@ -190,40 +155,6 @@ const LandingPage: React.FC = () => {
     setFormData({ ...formData, [name]: name.includes('Salary') || name.includes('emi') || name.includes('surplus') || name.includes('tenure') ? parseInt(value) : value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@novatrust.co.in", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-          _subject: `New Contact Form Submission from ${formData.name}`
-        })
-      });
-      if (response.ok) {
-        setSubmitted(true);
-        setFormData({
-          ...formData, name: '', email: '', phone: '', subject: '', message: ''
-        });
-      } else {
-        alert("Failed to send message. Please try again or contact us directly.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
