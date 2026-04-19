@@ -6,30 +6,30 @@ const Footer: React.FC = () => {
   const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
 
   return (
-    <footer className="bg-green-950 text-white py-12 border-t border-amber-500/20">
+    <footer className="bg-gradient-to-br from-emerald-950 via-[#044c4c] to-green-950 text-white py-16 border-t border-emerald-500/30">
       <div className="w-full px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <div className="flex items-center mb-4">
-              <div className="relative w-12 h-12 p-1 rounded-full bg-slate-950/70 shadow-xl ring-1 ring-white/25 overflow-hidden">
+            <div className="flex items-center mb-6">
+              <div className="relative w-24 h-20 overflow-visible flex items-center justify-center mr-4">
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="relative w-full h-full object-cover rounded-full"
+                  className="h-28 w-auto object-contain rotate-90 scale-150 filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                 />
               </div>
-              <h3 className="ml-2 text-xl font-bold text-amber-400 tracking-wider">NOVATRUST CHITS</h3>
+              <h3 className="text-2xl font-bold text-emerald-400 tracking-wider">NOVATRUST CHITS</h3>
             </div>
             <p className="text-slate-300 mb-4 leading-relaxed">
               Your trusted partner for secure and transparent chit funds. Building financial futures with integrity and innovation.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-5 text-white">
               <a
                 href="https://facebook.com/novatrustchits"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform duration-300 shadow-sm rounded-full bg-white flex items-center justify-center w-8 h-8"
+                className="hover:scale-110 transition-transform duration-300 w-8 h-8 flex items-center justify-center transform"
               >
                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
               </a>
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
                 href="https://instagram.com/novatrustchits"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform duration-300 shadow-sm rounded-md bg-white flex items-center justify-center overflow-hidden w-8 h-8 p-[5px]"
+                className="hover:scale-110 transition-transform duration-300 w-8 h-8 flex items-center justify-center transform"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
                   <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#f09433" /><stop offset="25%" stopColor="#e6683c" /><stop offset="50%" stopColor="#dc2743" /><stop offset="75%" stopColor="#cc2366" /><stop offset="100%" stopColor="#bc1888" /></linearGradient></defs>
@@ -47,11 +47,14 @@ const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href="mailto:kartik.lahot03@gmail.com"
-                className="text-slate-300 hover:text-amber-200 transition-colors duration-300 hover:scale-110 transform"
+                href="mailto:info@novatrust.co.in"
+                className="hover:scale-110 transition-transform duration-300 w-8 h-8 flex items-center justify-center transform"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-full h-full">
+                  <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.73V42.5h8.5C44.3,42.5,45,41.8,45,41V16.2z" />
+                  <path fill="#1e88e5" d="M3,16.2l3.6,1.96l6.4,5.52V42.5H4.5c-0.8,0-1.5-0.7-1.5-1.5V16.2z" />
+                  <polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.68 24,31.93 35,23.68 36,17" />
+                  <path fill="#c62828" d="M3,12.29l6.19,4.64l3.81-2.93V11.2c0-3.3,3.64-5.3,6.5-3.66L24,11l4.5-3.46 c2.86-1.64,6.5,0.36,6.5,3.66v2.8l4.8,3.69L45,12.29c0-1.1-1.3-1.7-2.3-1.1L24,25.54L5.3,11.19C4.3,10.6,3,11.2,3,12.29z" />
                 </svg>
               </a>
             </div>
@@ -76,7 +79,7 @@ const Footer: React.FC = () => {
               <li><Link to="/benefits" className="text-slate-300 hover:text-white transition-colors duration-300">Benefits</Link></li>
               <li><Link to="/terms" className="text-slate-300 hover:text-white transition-colors duration-300">Terms & Conditions</Link></li>
               <li><Link to="/contact" className="text-slate-300 hover:text-white transition-colors duration-300">Contact Us</Link></li>
-              <li><a href="mailto:kartik.lahot03@gmail.com" className="text-slate-300 hover:text-white transition-colors duration-300">Email Support</a></li>
+              <li><a href="mailto:info@novatrust.co.in" className="text-slate-300 hover:text-white transition-colors duration-300">Email Support</a></li>
             </ul>
           </div>
         </div>

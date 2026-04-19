@@ -4,18 +4,18 @@ import Footer from '../components/Footer';
 
 const AboutChitFundsPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-100 via-green-50 to-emerald-50 pt-24 pb-20">
       <Header />
       <div className="flex-1 w-full px-4 max-w-7xl mx-auto text-left">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-amber-500 bg-clip-text text-transparent mb-8 text-left">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-8 text-left">
           About Chit Funds
         </h1>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">What is a Chit Fund?</h2>
           <p className="text-gray-700 leading-relaxed mb-6">
-            A chit fund is a savings scheme where a group of people contribute a fixed amount regularly to a common pool. 
-            The collected money is then auctioned or distributed to members based on a predetermined cycle. 
+            A chit fund is a savings scheme where a group of people contribute a fixed amount regularly to a common pool.
+            The collected money is then auctioned or distributed to members based on a predetermined cycle.
             It's a traditional Indian financial instrument that combines savings, borrowing, and investment.
           </p>
         </div>

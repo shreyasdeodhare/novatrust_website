@@ -44,7 +44,7 @@ const CalculatorPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-100 via-green-50 to-emerald-50 pt-24 pb-20">
       <Header />
       <div className="flex-1 w-full px-4 max-w-7xl mx-auto">
         <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -52,13 +52,13 @@ const CalculatorPage: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Chit Fund Calculator</h1>
             <p className="text-lg text-slate-700 max-w-2xl">Estimate your fund return, cash flow and auction outcome with a simple, transparent calculator.</p>
           </div>
-          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-semibold shadow-lg hover:from-amber-500 hover:to-yellow-500 transition">
+          <Link to="/" className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-emerald-400 via-emerald-500 to-green-400 text-white font-semibold shadow-lg hover:from-emerald-500 hover:to-green-500 transition">
             Home Page
           </Link>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          <div className="rounded-3xl bg-white p-8 shadow-xl border border-slate-200">
+          <div className="rounded-3xl bg-white p-8 shadow-xl border border-emerald-100">
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Monthly Contribution (₹)</label>
@@ -76,15 +76,15 @@ const CalculatorPage: React.FC = () => {
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Winning Month</label>
                 <input value={winMonth} onChange={(e) => setWinMonth(e.target.value)} type="number" placeholder="5" className="w-full rounded-2xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-blue-300 outline-none" />
               </div>
-              <button onClick={calculate} className="w-full rounded-full bg-blue-600 text-white font-semibold py-3 hover:bg-blue-700 transition">Calculate Return</button>
+              <button onClick={calculate} className="w-full rounded-full bg-emerald-600 text-white font-semibold py-3 hover:bg-emerald-700 transition">Calculate Return</button>
             </div>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-br from-indigo-700 to-amber-500 text-white p-8 shadow-2xl border border-amber-200">
+          <div className="rounded-3xl bg-gradient-to-br from-emerald-700 to-green-600 text-white p-8 shadow-2xl border border-emerald-200">
             <h2 className="text-2xl font-semibold mb-4">Projected Outcome</h2>
             <div className="space-y-4">
-              <div className="rounded-3xl bg-amber-100/40 p-5">
-                <span className="block text-sm text-amber-700">Total Fund Value</span>
+              <div className="rounded-3xl bg-white/10 p-5">
+                <span className="block text-sm text-emerald-100">Total Fund Value</span>
                 <p className="text-3xl font-bold mt-2">₹{results.totalFundValue || '0'}</p>
               </div>
               <div className="rounded-3xl bg-amber-100/40 p-5">

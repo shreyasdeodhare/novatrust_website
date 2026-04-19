@@ -7,7 +7,7 @@ const schemes = [
   {
     title: 'Basic Chit Fund',
     description: 'Entry-level chit fund with affordable monthly subscription. Total value: ₹1,00,000, Duration: 20 months, Monthly subscription: ₹5,000.',
-    image: 'https://images.unsplash.com/photo-1616432617650-659fec5a9144?auto=format&fit=crop&w=1000&q=80',
+    image: '/indian_family_happy.png',
     amount: '₹1,00,000',
     duration: '20 months',
     monthlyContribution: '₹5,000'
@@ -15,7 +15,7 @@ const schemes = [
   {
     title: 'Standard Chit Fund',
     description: 'Standard chit fund with balanced value and duration. Total value: ₹2,00,000, Duration: 25 months, Monthly subscription: ₹8,000.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80',
+    image: '/indian_family_savings.png',
     amount: '₹2,00,000',
     duration: '25 months',
     monthlyContribution: '₹8,000'
@@ -23,7 +23,7 @@ const schemes = [
   {
     title: 'Premium Chit Fund',
     description: 'Premium chit fund with higher value and longer duration. Total value: ₹3,00,000, Duration: 30 months, Monthly subscription: ₹10,000.',
-    image: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=1000&q=80',
+    image: '/indian_business_woman.png',
     amount: '₹3,00,000',
     duration: '30 months',
     monthlyContribution: '₹10,000'
@@ -31,7 +31,7 @@ const schemes = [
   {
     title: 'Gold Chit Fund',
     description: 'High-value chit fund for serious investors. Total value: ₹5,00,000, Duration: 40 months, Monthly subscription: ₹12,500.',
-    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1000&q=80',
+    image: '/indian_family_home.png',
     amount: '₹5,00,000',
     duration: '40 months',
     monthlyContribution: '₹12,500'
@@ -39,7 +39,7 @@ const schemes = [
   {
     title: 'Platinum Chit Fund',
     description: 'Platinum chit fund with higher monthly subscription. Total value: ₹5,00,000, Duration: 25 months, Monthly subscription: ₹20,000.',
-    image: 'https://images.unsplash.com/photo-1621252178972-32a265af1da1?auto=format&fit=crop&w=1000&q=80',
+    image: '/indian_investment_growth.png',
     amount: '₹5,00,000',
     duration: '25 months',
     monthlyContribution: '₹20,000'
@@ -47,7 +47,7 @@ const schemes = [
   {
     title: 'Diamond Chit Fund',
     description: 'High-value chit fund with longer duration. Total value: ₹10,00,000, Duration: 50 months, Monthly subscription: ₹20,000.',
-    image: 'https://images.unsplash.com/photo-1593672715438-d88a70629abe?auto=format&fit=crop&w=1000&q=80',
+    image: '/profit_growth_chart.png',
     amount: '₹10,00,000',
     duration: '50 months',
     monthlyContribution: '₹20,000'
@@ -97,34 +97,83 @@ const LandingPage: React.FC = () => {
     monthlyDividend: ''
   });
   const [showTerms, setShowTerms] = useState(false);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [selectedScheme, setSelectedScheme] = useState('');
+  const [applyLoading, setApplyLoading] = useState(false);
+
+  const openApplyModal = (schemeName: string) => {
+    setSelectedScheme(schemeName);
+    setIsApplyModalOpen(true);
+  };
+
+  const handleApplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setApplyLoading(true);
+    const form = e.currentTarget;
+    const formValues = new FormData(form);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@novatrust.co.in", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formValues.get('name'),
+          email: formValues.get('email'),
+          phone: formValues.get('phone'),
+          scheme: selectedScheme,
+          _subject: `New Chit Application for ${selectedScheme} from ${formValues.get('name')}`
+        })
+      });
+      if (response.ok) {
+        alert("Application sent successfully! We will contact you soon.");
+        setIsApplyModalOpen(false);
+        form.reset();
+      } else {
+        alert("Failed to send application. Please try again.");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    } finally {
+      setApplyLoading(false);
+    }
+  };
 
   const heroSlides = [
+    {
+      title: "Government Verified Chit Fund",
+      subtitle: "100% Secure, Transparent & Lawful",
+      description: "We are proudly registered and verified by the government. Your investments are completely secure with full regulatory compliance.",
+      image: "/indian_family_savings.png",
+      cta: "Verify Us"
+    },
     {
       title: "Happy Family, Happy Future",
       subtitle: "Secure your family's future with NovaTrust Chits",
       description: "Savings for a happier family and a brighter tomorrow. Start your journey today.",
-      image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1000&q=80",
+      image: "/indian_family_home.png",
       cta: "Join Now"
     },
     {
       title: "Fuel Your Business With NovaTrust Chits",
       subtitle: "Expand and diversify your business with convenient access to funds",
       description: "Pay online and grow your business with our hassle-free borrowing solutions.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80",
+      image: "/indian_investment_growth.png",
       cta: "Get Started"
     },
     {
       title: "NovaTrust Chits For Hassle-Free Borrowing",
       subtitle: "See your dreams take shape tomorrow",
       description: "Bid for the prize money and get instant funds when you need them.",
-      image: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=1000&q=80",
+      image: "/indian_family_happy.png",
       cta: "Explore Options"
     },
     {
       title: "Compulsory Saving & Investment With Us",
       subtitle: "Smart saving for a happy future",
       description: "Your investment works early for you with our secure chit fund schemes.",
-      image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1000&q=80",
+      image: "/indian_business_woman.png",
       cta: "Start Saving"
     }
   ];
@@ -132,7 +181,7 @@ const LandingPage: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 
@@ -222,46 +271,45 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen flex flex-col font-sans bg-brand-surface relative overflow-hidden">
       <Header />
       {/* Hero Carousel Section */}
-      <section id="hero" className="relative overflow-hidden min-h-[520px] py-20 lg:py-28 bg-green-950">
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-green-950/90 via-green-900/60 to-emerald-800/40"></div>
+      <section id="hero" className="relative overflow-hidden min-h-[650px] py-16 lg:py-24 bg-[#ecfdf5]">
+        <div className="absolute inset-0 bg-[#ecfdf5] opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/95 via-green-100/70 to-emerald-50/50"></div>
 
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto px-4 min-h-[520px] overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-4 min-h-[650px] overflow-hidden">
           {heroSlides.map((slide, index) => (
             <div
               key={index}
               className={`absolute inset-0 transition-opacity duration-1000 will-change-opacity ${index === currentSlide ? 'opacity-100' : 'opacity-0'
                 }`}
             >
-              <div className="w-full min-h-[520px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-12 py-10 transform-gpu">
-                <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                  <div className="inline-block rounded-full px-6 py-2 mb-4 bg-green-950/35 border border-white/20 text-white">
-                    <span className="text-sm font-semibold">🚀 Most Trusted Chit Fund Platform</span>
+              <div className="w-full min-h-[650px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-8 py-8 transform-gpu">
+                <div className="md:w-1/2 mb-6 md:mb-0 text-center md:text-left">
+                  <div className="inline-block rounded-full px-6 py-2 mb-4 bg-emerald-600/20 border border-emerald-100 shadow-sm">
+                    <span className="text-sm font-semibold text-emerald-900">🚀 Most Trusted Chit Fund Platform</span>
                   </div>
-
-                  <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight bg-gradient-to-r from-emerald-800 to-green-700 bg-clip-text text-transparent">
                     {slide.title}
                   </h1>
-                  <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">
+                  <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-emerald-900">
                     {slide.subtitle}
                   </h2>
-                  <p className="text-xl mb-8 opacity-90 text-white">{slide.description}</p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <p className="text-lg mb-6 text-emerald-800 font-medium line-clamp-2 md:line-clmap-none">{slide.description}</p>
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
                     <Link to="/calculator" className="inline-flex">
-                      <div className="bg-white text-green-950 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                      <div className="bg-white text-[#056160] px-8 py-3 rounded-full font-bold shadow-xl hover:bg-emerald-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
                         {slide.cta}
                       </div>
                     </Link>
                     <Link to="/live-auction" className="inline-flex">
-                      <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 px-8 py-4 rounded-full font-bold shadow-xl hover:from-amber-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                      <div className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-8 py-3 rounded-full font-bold shadow-xl hover:from-emerald-600 hover:to-green-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
                         Join Live Auction
                       </div>
                     </Link>
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <div className="overflow-hidden rounded-3xl border-4 border-white/20 ring-1 ring-white/15 shadow-[0_30px_80px_rgba(0,0,0,0.35)] bg-green-950">
+                  <div className="overflow-hidden rounded-3xl border-4 border-emerald-200 ring-1 ring-emerald-100 shadow-[0_30px_80px_rgba(16,185,129,0.25)] bg-white">
                     <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
                   </div>
                 </div>
@@ -276,7 +324,7 @@ const LandingPage: React.FC = () => {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${index === currentSlide ? 'bg-amber-400' : 'bg-white/50'
+              className={`w-3 h-3 rounded-full transition-all ${index === currentSlide ? 'bg-emerald-400' : 'bg-white/50'
                 }`}
             />
           ))}
@@ -302,12 +350,12 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 bg-emerald-50">
         <div className="w-full px-4 text-center">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-6">Welcome to NovaTrust</h2>
           <p className="text-xl text-gray-700 mb-8 leading-relaxed">NovaTrust Chits is committed to providing a safe, transparent, and rewarding chit fund experience. Our mission is to help you save, grow, and achieve your financial goals with ease and trust.</p>
-          <div className="bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 rounded-3xl p-8 shadow-xl border border-emerald-100">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="About Us" className="mx-auto w-32 h-32 object-cover rounded-full shadow-xl mb-6 ring-4 ring-emerald-200" />
+          <div className="bg-white rounded-3xl p-8 shadow-xl border border-emerald-100">
+            <img src="/profit_growth_chart.png" alt="Financial Growth" className="mx-auto w-32 h-32 object-cover rounded-full shadow-xl mb-6 ring-4 ring-emerald-200" />
             <h3 className="text-2xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-4">Empowering Your Financial Journey</h3>
             <p className="text-lg text-gray-600">Join our community of satisfied members who have achieved their financial dreams through our transparent chit fund schemes.</p>
           </div>
@@ -315,9 +363,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* What is a Chit Fund */}
-      <section className="py-16 bg-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-emerald-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-yellow-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      <section className="py-16 bg-[#f0fdf4] overflow-hidden relative">
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-emerald-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-green-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
         <div className="w-full px-4 max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
@@ -335,7 +383,7 @@ const LandingPage: React.FC = () => {
               </ul>
             </div>
             <div className="order-1 lg:order-2">
-              <img src="https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Chit Fund Piggybank Savings" className="rounded-3xl shadow-2xl object-cover w-full h-[400px] border-4 border-white transform hover:scale-105 transition-transform duration-500" />
+              <img src="/indian_family_savings.png" alt="Indian Family Savings" className="rounded-3xl shadow-2xl object-cover w-full h-[400px] border-4 border-white transform hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -491,27 +539,30 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Schemes Section */}
-      <section id="schemes" className="py-20 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      <section id="schemes" className="py-20 bg-[#ecfdf5]">
         <div className="px-4">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Our Chit Fund Schemes</h2>
 
           {/* Schemes Table */}
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12 transform hover:scale-105 transition-transform duration-300 border border-teal-100">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12 transform hover:scale-105 transition-transform duration-300 border border-emerald-100">
             <div className="px-8 py-10">
               <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">Available Chit Fund Schemes</h3>
 
               <div className="overflow-x-auto rounded-2xl shadow-lg border border-emerald-100">
                 <table className="min-w-full border-collapse overflow-hidden">
-                  <thead className="bg-green-950 text-white">
+                  <thead className="bg-[#10b981] text-white">
                     <tr>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-amber-500">
+                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-emerald-300">
                         💰 MONTHLY SUBSCRIPTION
                       </th>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-amber-500 border-l border-green-900/50">
+                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-emerald-300 border-l border-green-900/50">
                         ⏰ DURATION (MONTHS)
                       </th>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-amber-500 border-l border-green-900/50">
+                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-emerald-300 border-l border-green-900/50">
                         🎯 FUND VALUE
+                      </th>
+                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-emerald-300 border-l border-green-900/50">
+                        ⚡ ACTION
                       </th>
                     </tr>
                   </thead>
@@ -520,31 +571,49 @@ const LandingPage: React.FC = () => {
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹5,000</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">20</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹1,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Basic Chit Fund - ₹1,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
+                      </td>
                     </tr>
                     <tr className="bg-white hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 transition-all duration-300 transform hover:scale-105">
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹8,000</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">25</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹2,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Standard Chit Fund - ₹2,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
+                      </td>
                     </tr>
                     <tr className="bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all duration-300 transform hover:scale-105">
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹10,000</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">30</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹3,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Premium Chit Fund - ₹3,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
+                      </td>
                     </tr>
                     <tr className="bg-white hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 transition-all duration-300 transform hover:scale-105">
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹12,500</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">40</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹5,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Gold Chit Fund - ₹5,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
+                      </td>
                     </tr>
                     <tr className="bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all duration-300 transform hover:scale-105">
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹20,000</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">25</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹5,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Platinum Chit Fund - ₹5,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
+                      </td>
                     </tr>
                     <tr className="bg-white hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 transition-all duration-300 transform hover:scale-105">
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent">₹20,000</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">50</td>
                       <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">₹10,00,000</td>
+                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
+                        <button onClick={() => openApplyModal('Diamond Chit Fund - ₹10,00,000')} className="bg-gradient-to-r from-emerald-400 to-green-500 text-white font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-emerald-500/20">Apply Now</button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -555,10 +624,10 @@ const LandingPage: React.FC = () => {
           {/* Scheme Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {schemes.map((scheme, idx) => (
-              <div key={idx} className="bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-teal-100">
-                <div className="h-48 bg-gradient-to-br from-green-600 via-emerald-500 to-teal-600 relative">
-                  <img src={scheme.image} alt={scheme.title} className="w-full h-full object-cover opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div key={idx} className="group bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl border border-emerald-100">
+                <div className="h-80 md:h-[450px] bg-emerald-100 relative overflow-hidden">
+                  <img src={scheme.image} alt={scheme.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-bold text-white mb-2">{scheme.title}</h3>
                     <p className="text-2xl font-bold text-yellow-300 mb-2">{scheme.amount}</p>
@@ -588,21 +657,21 @@ const LandingPage: React.FC = () => {
                   <div className="flex space-x-2 bg-gray-100 p-1 rounded-xl">
                     <button
                       onClick={() => setFormData({ ...formData, calculatorType: 'income' })}
-                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'income' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'income' ? 'bg-emerald-500 text-white' : 'text-gray-600 hover:bg-gray-200'
                         }`}
                     >
                       Income Based
                     </button>
                     <button
                       onClick={() => setFormData({ ...formData, calculatorType: 'instalment' })}
-                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'instalment' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'instalment' ? 'bg-emerald-500 text-white' : 'text-gray-600 hover:bg-gray-200'
                         }`}
                     >
                       Instalment Based
                     </button>
                     <button
                       onClick={() => setFormData({ ...formData, calculatorType: 'amount' })}
-                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'amount' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-200'
+                      className={`px-6 py-2 rounded-lg font-semibold transition-all ${formData.calculatorType === 'amount' ? 'bg-emerald-500 text-white' : 'text-gray-600 hover:bg-gray-200'
                         }`}
                     >
                       Amount Based
@@ -807,7 +876,7 @@ const LandingPage: React.FC = () => {
       <section id="auction" className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
         <div className="w-full px-4 text-center">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-6">🎯 Live Auction</h2>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl">
+          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
             Experience transparent and exciting live chit fund auctions with real-time bidding.
             Our auctions are conducted fairly with complete transparency and secure payment processing.
           </p>
@@ -840,59 +909,61 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Terms and Conditions Section */}
-      {showTerms && (
-        <section id="terms" className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
-          <div className="px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
-              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-emerald-100">
-                <div className="px-8 py-10">
-                  <p className="font-bold text-lg text-gray-700 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-6">Novatrust Chits Private Ltd Rules</h3>
-                  <div className="space-y-6">
-                    <ol className="list-decimal pl-6 space-y-3 text-gray-700 leading-relaxed">
-                      <li>To become a member or a guarantor in Novatrust Chits Private Ltd, one must be at least 20 years old.</li>
-                      <li>A person who wants to join the group must submit a photo, Aadhaar card, ration card, and PAN card, and can join by paying an advance amount of ₹1000.</li>
-                      <li>A member can hold any number of tickets in a single group.</li>
-                      <li>Members who join the chit group will be issued a registered Form No. 8 agreement for the chit value by Novatrust Chits Private Ltd, as per the 1982 Chit Fund Act.</li>
-                      <li>Before the group begins, Novatrust Chits Private Ltd provides a list of 20 individuals registered with the government to the group members through both online and offline methods.</li>
-                      <li>Novatrust Chits Private Ltd provides group members with a receipt for the fixed deposit made as collateral in the name of the group for its security, as per the Chit Fund Act, 1982.</li>
-                      <li>Novatrust Chits Private Ltd will operate the group only after providing the required security to the registrar and obtaining approval from the joint chit registrar.</li>
-                      <li>The installment amount must be paid one day before the chit date. Those who do so will be given a bonus ranging from ₹100 to ₹150.</li>
-                      <li>Members must collect a receipt immediately after paying their installment. If they claim to have paid without a receipt, the company will not be held responsible.</li>
-                      <li>If a chit group member wishes to receive the chit amount within six months, they must inform the company before joining the group. If they wish to receive it after seven months, they must give at least one month's prior notice.</li>
-                      <li>New members joining the chit group must have a minimum CIBIL score of 550.</li>
-                      <li>To receive the chit amount, two guarantors are required: (A) a Novatrust Chits Private Ltd chit group member and (B) a government employee. The documents of both the member and the guarantors must be of the same type.</li>
-                      <li>A member receiving the chit amount who provides the required deposit or registers a mortgage for the remaining months does not need to submit any additional documents or guarantees.</li>
-                      <li>Members who wish to receive the chit amount after 12 months must provide some form of guarantee. For those receiving it after 15 months, submitting their own documents will be sufficient.</li>
-                      <li>The member who is going to receive the chit amount can get the amount on the very next day after completing the required security procedures for the remaining monthly installments.</li>
-                      <li>Novatrust Chits Private Ltd members can avail insurance for their chit value. The premium will be 1% of the chit value, and this offer is applicable to individuals between 20 and 50 years of age.</li>
-                      <li>The foreman commission is 5% of the chit amount, and this commission is included in the monthly installment.</li>
-                      <li>Novatrust Chits Private Ltd charges commission on the chit value of individual members, but does not charge commission on the total amount of the chit group.</li>
-                      <li>The foreman commission and service charges cover the subscriber's investment security fee, government registration stamp duty, online service charges for daily and monthly installment payments, agreement fee for chit amount disbursement, and 24/7 website-based account statement maintenance service charges.</li>
-                      <li>Documents to be submitted by the auction winning customer: Proof of ID, Proof of Address, Proof of Income, Detailed documents of own house and 3 bank cheque for security will be mandatory. Also 2 guarantors will be required and their documents will be the same.</li>
-                      <li>If a member delays the payment of their pending chit installment within  15 days from the chit date, a 3% penalty must be paid. Similarly, if the delay extends to next 1days, a 2% penalty or interest will be charged.</li>
-                      <li>If a member's cheque is bounced by the bank for any reason, a bounce charge of ₹500 will be collected.</li>
-                      <li>If a member keeps their chit installment pending for up to 30 days from the chit date, they will not be eligible to receive the chit amount for the next five months.</li>
-                      <li>If a member wishes to cancel their ticket and transfer it to a new subscriber, a 1% processing fee will be charged on the chit value.</li>
-                      <li>If a member cancels their ticket and later joins a new group, they will be eligible to receive the chit amount only after six months.</li>
-                      <li>As per the agreement between the company and the customer, if the chit installment remains unpaid for up to 30days from the chit date, the company has the right to cancel the member's ticket without their consent.</li>
-                      <li>As per the agreement, if a member who has taken the chit amount fails to pay the chit installments for two consecutive months, they will not be eligible to receive any rebate amount for the remaining monthly installments.</li>
-                      <li>If a member who has taken the chit amount fails to pay their pending dues for more than two months, legal action will be taken under the 1982 Chit Fund Act. The concerned subscriber and guarantors will be responsible for bearing all legal expenses.</li>
-                      <li>After the chit group ends, the subscriber can collect all their related documents.</li>
-                      <li>The company will not disclose any subscriber's transactions to any other person without the consent of the concerned subscriber.</li>
-                      <li>All guarantees accepted by the Novatrust Chits Private Ltd management must be in written form only.</li>
-                    </ol>
-                  </div>
-                  <div className="text-center mt-8">
-                    <button onClick={() => setShowTerms(false)} className="text-amber-600 underline hover:text-amber-700 font-semibold transition-colors duration-300">Hide Terms</button>
+      {
+        showTerms && (
+          <section id="terms" className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
+            <div className="px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-12 text-center">Terms and Conditions</h2>
+                <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-emerald-100">
+                  <div className="px-8 py-10">
+                    <p className="font-bold text-lg text-gray-700 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-6">Novatrust Chits Private Ltd Rules</h3>
+                    <div className="space-y-6">
+                      <ol className="list-decimal pl-6 space-y-3 text-gray-700 leading-relaxed">
+                        <li>To become a member or a guarantor in Novatrust Chits Private Ltd, one must be at least 20 years old.</li>
+                        <li>A person who wants to join the group must submit a photo, Aadhaar card, ration card, and PAN card, and can join by paying an advance amount of ₹1000.</li>
+                        <li>A member can hold any number of tickets in a single group.</li>
+                        <li>Members who join the chit group will be issued a registered Form No. 8 agreement for the chit value by Novatrust Chits Private Ltd, as per the 1982 Chit Fund Act.</li>
+                        <li>Before the group begins, Novatrust Chits Private Ltd provides a list of 20 individuals registered with the government to the group members through both online and offline methods.</li>
+                        <li>Novatrust Chits Private Ltd provides group members with a receipt for the fixed deposit made as collateral in the name of the group for its security, as per the Chit Fund Act, 1982.</li>
+                        <li>Novatrust Chits Private Ltd will operate the group only after providing the required security to the registrar and obtaining approval from the joint chit registrar.</li>
+                        <li>The installment amount must be paid one day before the chit date. Those who do so will be given a bonus ranging from ₹100 to ₹150.</li>
+                        <li>Members must collect a receipt immediately after paying their installment. If they claim to have paid without a receipt, the company will not be held responsible.</li>
+                        <li>If a chit group member wishes to receive the chit amount within six months, they must inform the company before joining the group. If they wish to receive it after seven months, they must give at least one month's prior notice.</li>
+                        <li>New members joining the chit group must have a minimum CIBIL score of 550.</li>
+                        <li>To receive the chit amount, two guarantors are required: (A) a Novatrust Chits Private Ltd chit group member and (B) a government employee. The documents of both the member and the guarantors must be of the same type.</li>
+                        <li>A member receiving the chit amount who provides the required deposit or registers a mortgage for the remaining months does not need to submit any additional documents or guarantees.</li>
+                        <li>Members who wish to receive the chit amount after 12 months must provide some form of guarantee. For those receiving it after 15 months, submitting their own documents will be sufficient.</li>
+                        <li>The member who is going to receive the chit amount can get the amount on the very next day after completing the required security procedures for the remaining monthly installments.</li>
+                        <li>Novatrust Chits Private Ltd members can avail insurance for their chit value. The premium will be 1% of the chit value, and this offer is applicable to individuals between 20 and 50 years of age.</li>
+                        <li>The foreman commission is 5% of the chit amount, and this commission is included in the monthly installment.</li>
+                        <li>Novatrust Chits Private Ltd charges commission on the chit value of individual members, but does not charge commission on the total amount of the chit group.</li>
+                        <li>The foreman commission and service charges cover the subscriber's investment security fee, government registration stamp duty, online service charges for daily and monthly installment payments, agreement fee for chit amount disbursement, and 24/7 website-based account statement maintenance service charges.</li>
+                        <li>Documents to be submitted by the auction winning customer: Proof of ID, Proof of Address, Proof of Income, Detailed documents of own house and 3 bank cheque for security will be mandatory. Also 2 guarantors will be required and their documents will be the same.</li>
+                        <li>If a member delays the payment of their pending chit installment within  15 days from the chit date, a 3% penalty must be paid. Similarly, if the delay extends to next 1days, a 2% penalty or interest will be charged.</li>
+                        <li>If a member's cheque is bounced by the bank for any reason, a bounce charge of ₹500 will be collected.</li>
+                        <li>If a member keeps their chit installment pending for up to 30 days from the chit date, they will not be eligible to receive the chit amount for the next five months.</li>
+                        <li>If a member wishes to cancel their ticket and transfer it to a new subscriber, a 1% processing fee will be charged on the chit value.</li>
+                        <li>If a member cancels their ticket and later joins a new group, they will be eligible to receive the chit amount only after six months.</li>
+                        <li>As per the agreement between the company and the customer, if the chit installment remains unpaid for up to 30days from the chit date, the company has the right to cancel the member's ticket without their consent.</li>
+                        <li>As per the agreement, if a member who has taken the chit amount fails to pay the chit installments for two consecutive months, they will not be eligible to receive any rebate amount for the remaining monthly installments.</li>
+                        <li>If a member who has taken the chit amount fails to pay their pending dues for more than two months, legal action will be taken under the 1982 Chit Fund Act. The concerned subscriber and guarantors will be responsible for bearing all legal expenses.</li>
+                        <li>After the chit group ends, the subscriber can collect all their related documents.</li>
+                        <li>The company will not disclose any subscriber's transactions to any other person without the consent of the concerned subscriber.</li>
+                        <li>All guarantees accepted by the Novatrust Chits Private Ltd management must be in written form only.</li>
+                      </ol>
+                    </div>
+                    <div className="text-center mt-8">
+                      <button onClick={() => setShowTerms(false)} className="text-amber-600 underline hover:text-amber-700 font-semibold transition-colors duration-300">Hide Terms</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )
+      }
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
@@ -903,7 +974,6 @@ const LandingPage: React.FC = () => {
             {/* Contact Info */}
             <div className="w-full h-full text-center bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 rounded-3xl p-8 shadow-xl border border-emerald-100 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-2xl">
               <h3 className="text-3xl text-gray-800 mb-3 font-bold">NovaTrust Chits Pvt Ltd</h3>
-              <p className="text-lg font-medium text-emerald-700 mb-8 bg-emerald-100 px-5 py-2 rounded-full inline-block mx-auto border border-emerald-200 shadow-sm">✅ Government Approved Chit Funds</p>
               <div className="flex flex-col items-start space-y-5 max-w-sm mx-auto w-full text-left">
                 <div className="flex items-start">
                   <span className="mr-4 text-xl">📞</span>
@@ -915,7 +985,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <div className="flex items-start">
                   <span className="mr-4 text-xl mt-1">📍</span>
-                  <span className="text-lg text-gray-700">Survey No. 28/P, Plot No. 33, 21 Leaves, Flat No. 702, Chh. Sambhajinagar (Aurangabad) - 431 001</span>
+                  <span className="text-lg text-gray-700">Main Address:Survey No. 28/P, Plot No. 33, 21 Leaves, Chh. Sambhajinagar (Aurangabad) - 431 001</span>
                 </div>
 
               </div>
@@ -935,30 +1005,33 @@ const LandingPage: React.FC = () => {
                   <button onClick={() => setSubmitted(false)} className="px-8 py-3 mx-auto bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 rounded-xl hover:from-amber-500 hover:to-yellow-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl">Send Another Message</button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 bg-white h-full rounded-3xl shadow-2xl p-8 border border-green-100 flex flex-col justify-between">
+                <form action="https://formsubmit.co/info@novatrust.co.in" method="POST" className="space-y-6 bg-white h-full rounded-3xl shadow-2xl p-8 border border-green-100 flex flex-col justify-between">
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_subject" value="New Contact Form Submission" />
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <input id="name" name="name" type="text" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Full Name" value={formData.name} onChange={handleChange} />
+                        <input id="name" name="name" type="text" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Full Name" />
                       </div>
                       <div>
-                        <input id="email" name="email" type="email" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Email Address" value={formData.email} onChange={handleChange} />
+                        <input id="email" name="email" type="email" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Email Address" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <input id="phone" name="phone" type="tel" className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
+                        <input id="phone" name="phone" type="tel" className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Phone Number" />
                       </div>
                       <div>
-                        <input id="subject" name="subject" type="text" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Subject" value={formData.subject} onChange={handleChange} />
+                        <input id="subject" name="subject" type="text" required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Subject" />
                       </div>
                     </div>
                     <div>
-                      <textarea id="message" name="message" rows={5} required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Your message" value={formData.message} onChange={handleChange}></textarea>
+                      <textarea id="message" name="message" rows={5} required className="w-full px-4 sm:px-6 py-3 sm:py-4 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-base sm:text-lg transition-all duration-300 placeholder-gray-400" placeholder="Your message"></textarea>
                     </div>
                   </div>
                   <div className="mt-6">
-                    <button type="submit" className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-bold py-4 px-6 rounded-xl hover:from-amber-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl" disabled={loading}>{loading ? 'Sending...' : 'Send Message'}</button>
+                    <button type="submit" className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-bold py-4 px-6 rounded-xl hover:from-amber-500 hover:to-yellow-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 text-lg shadow-lg hover:shadow-xl">Send Message</button>
                     {/* Terms link below submit button */}
                     <div className="text-center mt-4">
                       <a href="#terms" className="text-amber-600 underline hover:text-amber-700 font-semibold transition-colors duration-300" onClick={handleShowTerms}>Read Terms and Conditions</a>
@@ -986,6 +1059,41 @@ const LandingPage: React.FC = () => {
           <span className="absolute top-1/2 -translate-y-1/2 left-full border-4 border-transparent border-l-gray-900"></span>
         </span>
       </a>
+
+      {/* Apply Form Modal */}
+      {
+        isApplyModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+            <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative shadow-[0_0_50px_rgba(5,97,96,0.3)] border border-teal-100">
+              <button onClick={() => setIsApplyModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl font-bold transition-colors">&times;</button>
+              <h3 className="text-2xl font-bold mb-2 text-[#056160]">Apply for Scheme</h3>
+              <p className="text-gray-600 mb-6 font-semibold bg-emerald-50 p-3 rounded-lg border border-emerald-100">{selectedScheme}</p>
+
+              <form action="https://formsubmit.co/info@novatrust.co.in" method="POST" className="space-y-4">
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="Scheme_Applied" value={selectedScheme} />
+                <input type="hidden" name="_subject" value="New Chit Fund Application" />
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Full Name</label>
+                  <input type="text" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all placeholder-gray-400" placeholder="Your Name" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Email Address</label>
+                  <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all placeholder-gray-400" placeholder="youremail@example.com" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Phone Number</label>
+                  <input type="tel" name="phone" required className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all placeholder-gray-400" placeholder="+91 XXXXX XXXXX" />
+                </div>
+                <button type="submit" className="w-full bg-gradient-to-r from-[#056160] to-teal-800 hover:to-teal-900 text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mt-4">
+                  Submit Application
+                </button>
+              </form>
+            </div>
+          </div>
+        )
+      }
 
       <Footer />
     </div>
