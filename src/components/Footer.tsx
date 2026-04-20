@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
 
   return (
-    <footer className="bg-gradient-to-br from-emerald-950 via-[#044c4c] to-green-950 text-white py-16 border-t border-emerald-500/30">
+    <footer className="bg-gradient-to-br from-slate-900 via-[#044c4c] to-slate-800 text-white py-16 border-t-4 border-t-[#D4A574]">
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Company Info */}
@@ -16,10 +16,10 @@ const Footer: React.FC = () => {
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="h-28 w-auto object-contain rotate-90 scale-150 filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                  className="h-28 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 tracking-wider">NOVATRUST CHITS</h3>
+              <h3 className="text-2xl font-bold text-[#D4A574] tracking-wider">NOVATRUST CHITS</h3>
             </div>
             <p className="text-slate-300 mb-4 leading-relaxed">
               Your trusted partner for secure and transparent chit funds. Building financial futures with integrity and innovation.
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#D4A574]">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-slate-300 hover:text-white transition-colors duration-300">Home</Link></li>
               <li><Link to="/about-chit-funds" className="text-slate-300 hover:text-white transition-colors duration-300">About Chit Funds</Link></li>
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
 
           {/* Legal & Support */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-amber-400">Support</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#D4A574]">Support</h4>
             <ul className="space-y-2">
               <li><Link to="/benefits" className="text-slate-300 hover:text-white transition-colors duration-300">Benefits</Link></li>
               <li><Link to="/terms" className="text-slate-300 hover:text-white transition-colors duration-300">Terms & Conditions</Link></li>

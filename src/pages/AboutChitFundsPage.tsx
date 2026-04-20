@@ -4,10 +4,10 @@ import Footer from '../components/Footer';
 
 const AboutChitFundsPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-100 via-green-50 to-emerald-50 pt-24 pb-20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-100 via-slate-50 to-blue-50 pt-24 pb-20">
       <Header />
       <div className="flex-1 w-full px-4 max-w-7xl mx-auto text-left">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-green-800 to-emerald-600 bg-clip-text text-transparent mb-8 text-left">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent mb-8 text-left">
           About Chit Funds
         </h1>
 
