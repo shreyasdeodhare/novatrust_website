@@ -140,6 +140,13 @@ const LandingPage: React.FC = () => {
       description: "Your investment works early for you with our secure chit fund schemes.",
       image: "/indian_family_savings.png",
       cta: "Start Saving"
+    },
+    {
+      title: "Become Our Agent",
+      subtitle: "Empower Yourself & Materialize Your Dreams",
+      description: "Join NovaTrust Chits as a consultant. Empower yourself financially while helping your community save and grow with trusted chit funds.",
+      image: "/indian_business_woman.png",
+      cta: "Join Us"
     }
   ];
 
@@ -202,19 +209,19 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen flex flex-col font-sans bg-brand-surface relative overflow-hidden">
       <Header />
       {/* Hero Carousel Section */}
-      <section id="hero" className="relative overflow-hidden min-h-[650px] py-16 lg:py-24 bg-[#ecfdf5]">
+      <section id="hero" className="relative overflow-hidden min-h-[500px] pt-32 lg:pt-40 pb-10 lg:pb-16 bg-[#ecfdf5]">
         <div className="absolute inset-0 bg-[#ecfdf5] opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-100/95 via-slate-100/70 to-blue-50/50"></div>
 
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto px-4 min-h-[650px] overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-4 min-h-[500px] overflow-hidden">
           {heroSlides.map((slide, index) => (
             <div
               key={index}
               className={`absolute inset-0 transition-opacity duration-1000 will-change-opacity ${index === currentSlide ? 'opacity-100' : 'opacity-0'
                 }`}
             >
-              <div className="w-full min-h-[650px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-8 py-8 transform-gpu">
+              <div className="w-full min-h-[500px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-8 py-8 transform-gpu">
                 <div className="md:w-1/2 mb-6 md:mb-0 text-center md:text-left">
                   <div className="inline-block rounded-full px-6 py-2 mb-4 bg-[#056160]/10 border border-[#D4A574] shadow-sm">
                     <span className="text-sm font-semibold text-[#056160]">🚀 Most Trusted Chit Fund Platform</span>
@@ -240,8 +247,8 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_30px_80px_rgba(212,165,116,0.25)] bg-white w-full max-w-[460px]"
-                    style={{ aspectRatio: '1 / 1' }}>
+                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_20px_60px_rgba(212,165,116,0.2)] bg-white w-full max-w-[480px]"
+                    style={{ aspectRatio: '3 / 2' }}>
                     <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
                   </div>
                 </div>

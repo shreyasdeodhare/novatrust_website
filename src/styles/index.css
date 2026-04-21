@@ -150,6 +150,10 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+.remove-black-bg {
+  filter: url('#remove-black-background') !important;
+}
+
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.25);

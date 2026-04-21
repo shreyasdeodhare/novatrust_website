@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="h-28 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                  className="h-28 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)] remove-black-bg"
                 />
               </div>
               <h3 className="text-2xl font-bold text-[#D4A574] tracking-wider">NOVATRUST CHITS</h3>
