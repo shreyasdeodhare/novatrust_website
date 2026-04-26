@@ -19,7 +19,7 @@ const Header: React.FC = () => {
       <div className="w-full flex flex-col lg:flex-row items-center lg:justify-between px-2 py-1 lg:px-4 lg:py-0.5">
         {/* Logo and Nav in one row for desktop */}
         <div className="flex w-full items-center justify-center lg:justify-between">
-          <div className="flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 lg:h-20 lg:w-44 transition-transform duration-300 transform hover:scale-105 mx-auto">
+          <div className="flex items-center justify-center h-16 w-32 sm:h-24 sm:w-44 md:h-28 md:w-56 lg:h-32 lg:w-64 transition-transform duration-300 transform hover:scale-105 mx-auto">
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
