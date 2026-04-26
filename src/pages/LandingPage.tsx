@@ -948,6 +948,7 @@ const LandingPage: React.FC = () => {
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="table" />
                   <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                  <input type="hidden" name="_redirect" value="https://novatrust.co.in/" />
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
@@ -1013,6 +1014,7 @@ const LandingPage: React.FC = () => {
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="Scheme_Applied" value={selectedScheme} />
                 <input type="hidden" name="_subject" value="New Chit Fund Application" />
+                <input type="hidden" name="_redirect" value="https://novatrust.co.in/" />
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Full Name</label>
                   <input type="text" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all placeholder-gray-400" placeholder="Your Name" />
