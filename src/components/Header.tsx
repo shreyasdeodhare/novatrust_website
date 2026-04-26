@@ -16,15 +16,28 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#f0fdfa] via-[#e0f2ec] to-[#ccf5dc] text-[#064c4c] shadow-lg border-b-4 border-b-[#D4A574]">
-      <div className="w-full flex flex-col items-center justify-center px-2 py-1 lg:px-4 lg:py-2">
-        {/* Centered logo */}
-        <div className="flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-44 lg:h-32 lg:w-60 transition-transform duration-300 transform hover:scale-105 mx-auto">
-          <img
-            src={logoSrc}
-            alt="NovaTrust Logo"
-            className="h-full w-auto object-contain drop-shadow-[0_0_18px_rgba(6,76,76,0.3)] hover:drop-shadow-[0_0_30px_rgba(6,76,76,0.5)] animate-pulse-strong remove-black-bg"
-            style={{ animationDuration: '4s' }}
-          />
+      <div className="w-full flex flex-col lg:flex-row items-center lg:justify-between px-2 py-1 lg:px-4 lg:py-2">
+        {/* Logo and Nav in one row for desktop */}
+        <div className="flex w-full items-center justify-center lg:justify-between">
+          <div className="flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-44 lg:h-32 lg:w-60 transition-transform duration-300 transform hover:scale-105 mx-auto">
+            <img
+              src={logoSrc}
+              alt="NovaTrust Logo"
+              className="h-full w-auto object-contain drop-shadow-[0_0_18px_rgba(6,76,76,0.3)] hover:drop-shadow-[0_0_30px_rgba(6,76,76,0.5)] animate-pulse-strong remove-black-bg"
+              style={{ animationDuration: '4s' }}
+            />
+          </div>
+          {/* Desktop Navigation (right of logo) */}
+          <nav className="hidden lg:flex flex-wrap items-center gap-8 ml-8">
+            <Link to="/" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Home</Link>
+            <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">About</Link>
+            <Link to="/schemes" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Schemes</Link>
+            <Link to="/calculator" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Calculator</Link>
+            <Link to="/live-auction" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Live Auction</Link>
+            <Link to="/benefits" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Benefits</Link>
+            <Link to="/terms" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Terms</Link>
+            <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-[#D4A574] px-5 py-2 text-sm font-semibold text-[#064c4c] shadow-lg hover:bg-[#c29466] transition">Contact</Link>
+          </nav>
         </div>
 
         {/* Mobile Menu Button */}
@@ -49,18 +62,6 @@ const Header: React.FC = () => {
             </svg>
           )}
         </button>
-
-        {/* Desktop Navigation (centered below logo) */}
-        <nav className="hidden lg:flex flex-wrap items-center gap-8 justify-center mt-2">
-          <Link to="/" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Home</Link>
-          <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">About</Link>
-          <Link to="/schemes" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Schemes</Link>
-          <Link to="/calculator" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Calculator</Link>
-          <Link to="/live-auction" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Live Auction</Link>
-          <Link to="/benefits" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Benefits</Link>
-          <Link to="/terms" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Terms</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-[#D4A574] px-5 py-2 text-sm font-semibold text-[#064c4c] shadow-lg hover:bg-[#c29466] transition">Contact</Link>
-        </nav>
       </div>
 
       {/* Mobile Navigation */}
