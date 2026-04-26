@@ -16,14 +16,14 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#f0fdfa] via-[#e0f2ec] to-[#ccf5dc] text-[#064c4c] shadow-lg border-b-4 border-b-[#D4A574]">
-      <div className="w-full flex flex-col lg:flex-row items-center lg:justify-between px-2 py-1 lg:px-4 lg:py-2">
+      <div className="w-full flex flex-col lg:flex-row items-center lg:justify-between px-2 py-1 lg:px-4 lg:py-0.5">
         {/* Logo and Nav in one row for desktop */}
         <div className="flex w-full items-center justify-center lg:justify-between">
-          <div className="flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-44 lg:h-32 lg:w-60 transition-transform duration-300 transform hover:scale-105 mx-auto">
+          <div className="flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 lg:h-20 lg:w-44 transition-transform duration-300 transform hover:scale-105 mx-auto">
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="h-full w-auto object-contain drop-shadow-[0_0_18px_rgba(6,76,76,0.3)] hover:drop-shadow-[0_0_30px_rgba(6,76,76,0.5)] animate-pulse-strong remove-black-bg"
+              className="h-full w-auto object-contain drop-shadow-[0_0_14px_rgba(6,76,76,0.25)] hover:drop-shadow-[0_0_22px_rgba(6,76,76,0.4)] animate-pulse-strong remove-black-bg"
               style={{ animationDuration: '4s' }}
             />
           </div>
