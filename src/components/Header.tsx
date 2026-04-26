@@ -16,23 +16,21 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#f0fdfa] via-[#e0f2ec] to-[#ccf5dc] text-[#064c4c] shadow-lg border-b-4 border-b-[#D4A574]">
-      <div className="w-full px-4 py-3 flex flex-col lg:flex-row items-center justify-center gap-4 relative">
-        {/* Centered logo and company name */}
-        <div className="flex items-center justify-center">
-          <div className="flex items-center justify-center w-44 md:w-60 h-24 md:h-32 transition-transform duration-300 transform hover:scale-105">
-            <img
-              src={logoSrc}
-              alt="NovaTrust Logo"
-              className="h-full w-auto object-contain drop-shadow-[0_0_18px_rgba(6,76,76,0.3)] hover:drop-shadow-[0_0_30px_rgba(6,76,76,0.5)] animate-pulse-strong remove-black-bg"
-              style={{ animationDuration: '4s' }}
-            />
-          </div>
+      <div className="w-full flex flex-col items-center justify-center px-2 py-1 lg:px-4 lg:py-2">
+        {/* Centered logo */}
+        <div className="flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-44 lg:h-32 lg:w-60 transition-transform duration-300 transform hover:scale-105 mx-auto">
+          <img
+            src={logoSrc}
+            alt="NovaTrust Logo"
+            className="h-full w-auto object-contain drop-shadow-[0_0_18px_rgba(6,76,76,0.3)] hover:drop-shadow-[0_0_30px_rgba(6,76,76,0.5)] animate-pulse-strong remove-black-bg"
+            style={{ animationDuration: '4s' }}
+          />
         </div>
 
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-[#D4A574] bg-white p-2 text-[#064c4c] shadow-sm transition hover:bg-[#D4A574] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4A574] lg:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-[#D4A574] bg-white p-2 text-[#064c4c] shadow-sm transition hover:bg-[#D4A574] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4A574] lg:hidden mt-2"
           onClick={handleToggle}
           aria-expanded={isOpen}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
@@ -52,8 +50,8 @@ const Header: React.FC = () => {
           )}
         </button>
 
-        {/* Desktop Navigation (right-aligned) */}
-        <nav className="hidden lg:flex flex-wrap items-center gap-6 absolute right-4 top-1/2 -translate-y-1/2">
+        {/* Desktop Navigation (centered below logo) */}
+        <nav className="hidden lg:flex flex-wrap items-center gap-8 justify-center mt-2">
           <Link to="/" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Home</Link>
           <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">About</Link>
           <Link to="/schemes" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Schemes</Link>
