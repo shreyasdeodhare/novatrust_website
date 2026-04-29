@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const publicUrl = process.env.PUBLIC_URL || '';
-  const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
+  // Use PNG with transparency for logo
+  const logoSrc = `${publicUrl}/novatrust.PNG`;
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -14,36 +15,45 @@ const Header: React.FC = () => {
     setIsOpen(false);
   };
 
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#f0fdfa] via-[#e0f2ec] to-[#ccf5dc] text-[#064c4c] shadow-lg border-b-4 border-b-[#D4A574]">
-      <div className="w-full flex flex-col lg:flex-row items-center lg:justify-between px-2 py-1 lg:px-4 lg:py-0.5">
+    <header className="fixed top-0 left-0 right-0 z-50 text-white shadow-lg border-b border-[#4d818c]" style={{ background: '#38bdf8', height: '64px' }}>
+      <div className="w-full h-full flex flex-row items-center justify-between px-4">
         {/* Logo and Nav in one row for desktop */}
-        <div className="flex w-full items-center justify-center lg:justify-between">
-          <div className="flex items-center justify-center h-16 w-32 sm:h-24 sm:w-44 md:h-28 md:w-56 lg:h-32 lg:w-64 transition-transform duration-300 transform hover:scale-105 mx-auto">
+        <div className="flex flex-row items-center h-full">
+          <div className="flex items-center h-full bg-transparent p-0 m-0" style={{ height: '56px', minWidth: '120px' }}>
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="h-full w-auto object-contain drop-shadow-[0_0_14px_rgba(6,76,76,0.25)] hover:drop-shadow-[0_0_22px_rgba(6,76,76,0.4)] animate-pulse-strong remove-black-bg"
-              style={{ animationDuration: '4s' }}
+              className="h-14 w-auto object-contain bg-transparent"
+              style={{ maxHeight: '56px', background: 'transparent', minWidth: '100px' }}
             />
           </div>
           {/* Desktop Navigation (right of logo) */}
-          <nav className="hidden lg:flex flex-wrap items-center gap-8 ml-8">
-            <Link to="/" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Home</Link>
-            <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">About</Link>
-            <Link to="/schemes" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Schemes</Link>
-            <Link to="/calculator" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Calculator</Link>
-            <Link to="/live-auction" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Live Auction</Link>
-            <Link to="/benefits" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Benefits</Link>
-            <Link to="/terms" onClick={handleLinkClick} className="text-[#064c4c] font-semibold hover:text-[#D4A574] transition">Terms</Link>
-            <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-[#D4A574] px-5 py-2 text-sm font-semibold text-[#064c4c] shadow-lg hover:bg-[#c29466] transition">Contact</Link>
+          <nav className="hidden lg:flex flex-row items-center gap-5 ml-4 h-full">
+            <Link to="/" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Home</Link>
+            <Link to="/about-chit-funds" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">About</Link>
+            <Link to="/schemes" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Chits</Link>
+            <Link to="/calculator" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Calculator</Link>
+            <Link to="/live-auction" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Live Auction</Link>
+            <Link to="/benefits" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Benefits</Link>
+            <Link to="/terms" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Terms</Link>
+            <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#4d818c] shadow-lg hover:bg-[#ffd600] hover:text-[#4d818c] transition">Contact</Link>
           </nav>
         </div>
-
+        {/* Call Button aligned right, fill space */}
+        <div className="flex flex-1 flex-row items-center justify-end gap-4">
+          <a href="tel:08067806700" className="flex items-center bg-white text-[#039be5] font-bold rounded-full px-6 py-2 shadow hover:bg-[#ffd600] hover:text-[#039be5] transition text-lg" style={{ minWidth: '200px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" />
+            </svg>
+            7755996577
+          </a>
+        </div>
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-[#D4A574] bg-white p-2 text-[#064c4c] shadow-sm transition hover:bg-[#D4A574] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4A574] lg:hidden mt-2"
+          className="inline-flex items-center justify-center rounded-full border border-[#ffd600] bg-white p-2 text-[#039be5] shadow-sm transition hover:bg-[#ffd600] hover:text-[#039be5] focus:outline-none focus:ring-2 focus:ring-[#ffd600] lg:hidden ml-2"
           onClick={handleToggle}
           aria-expanded={isOpen}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}

@@ -984,6 +984,22 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Floating Call Button */}
+      <a
+        href="tel:08067806700"
+        className="fixed bottom-28 right-6 z-50 flex items-center justify-center w-16 h-16 bg-[#38bdf8] hover:bg-[#0ea5e9] text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group border-2 border-white"
+        aria-label="Call us"
+      >
+        <svg className="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" />
+        </svg>
+        {/* Tooltip */}
+        <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-semibold py-2 px-4 rounded-lg opacity-0 whitespace-nowrap group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          Call us
+          <span className="absolute top-1/2 -translate-y-1/2 left-full border-4 border-transparent border-l-gray-900"></span>
+        </span>
+      </a>
+
       {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/917755996577"

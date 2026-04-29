@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const publicUrl = process.env.PUBLIC_URL || '';
-  const logoSrc = `${publicUrl}/novatruatfinal.jpg`;
+  // Use the same logo as the header
+  const logoSrc = `${publicUrl}/novatrust.PNG`;
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-[#044c4c] to-slate-800 text-white py-16 border-t-4 border-t-[#D4A574]">
@@ -12,11 +13,12 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-6">
-              <div className="relative w-24 h-20 overflow-visible flex items-center justify-center mr-4">
+              <div className="relative h-10 w-auto overflow-visible flex items-center justify-center mr-4 bg-transparent p-0 m-0">
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="h-28 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.3)] remove-black-bg"
+                  className="h-10 w-auto object-contain bg-transparent"
+                  style={{ maxHeight: '48px', background: 'transparent' }}
                 />
               </div>
               <h3 className="text-2xl font-bold text-[#D4A574] tracking-wider">NOVATRUST CHITS</h3>
