@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 text-white shadow-lg border-b border-[#4d818c]" style={{ background: '#38bdf8', height: '64px' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 text-white shadow-lg border-b border-[#4d818c]" style={{ background: '#4d818c', height: '64px' }}>
       <div className="w-full h-full flex flex-row items-center justify-between px-4">
         {/* Logo and Nav in one row for desktop */}
         <div className="flex flex-row items-center h-full">
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
         </div>
         {/* Call Button aligned right, fill space */}
         <div className="flex flex-1 flex-row items-center justify-end gap-4">
-          <a href="tel:08067806700" className="flex items-center bg-white text-[#039be5] font-bold rounded-full px-6 py-2 shadow hover:bg-[#ffd600] hover:text-[#039be5] transition text-lg" style={{ minWidth: '200px' }}>
+          <a href="tel:7755996577" className="flex items-center bg-white text-[#039be5] font-bold rounded-full px-6 py-2 shadow hover:bg-[#ffd600] hover:text-[#039be5] transition text-lg" style={{ minWidth: '200px' }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2">
               <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" />
             </svg>

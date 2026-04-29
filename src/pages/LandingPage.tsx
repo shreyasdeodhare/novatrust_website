@@ -986,7 +986,7 @@ const LandingPage: React.FC = () => {
 
       {/* Floating Call Button */}
       <a
-        href="tel:08067806700"
+        href="tel:917755996577"
         className="fixed bottom-28 right-6 z-50 flex items-center justify-center w-16 h-16 bg-[#38bdf8] hover:bg-[#0ea5e9] text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group border-2 border-white"
         aria-label="Call us"
       >
