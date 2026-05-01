@@ -111,7 +111,7 @@ const LandingPage: React.FC = () => {
       subtitle: "100% Secure, Transparent & Lawful",
       description: "We are proudly registered and verified by the government. Your investments are completely secure with full regulatory compliance.",
       image: "/indian_family_savings.png",
-      cta: "Verify Us"
+      cta: ""
     },
     {
       title: "Happy Family, Happy Future",
@@ -234,11 +234,13 @@ const LandingPage: React.FC = () => {
                   </h2>
                   <p className="text-lg mb-6 text-[#056160] font-medium line-clamp-2 md:line-clmap-none">{slide.description}</p>
                   <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                    <Link to="/calculator" className="inline-flex">
-                      <div className="bg-white text-[#056160] px-8 py-3 rounded-full font-bold shadow-xl hover:bg-yellow-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-                        {slide.cta}
-                      </div>
-                    </Link>
+                    {slide.cta && (
+                      <Link to="/calculator" className="inline-flex">
+                        <div className="bg-white text-[#056160] px-8 py-3 rounded-full font-bold shadow-xl hover:bg-yellow-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                          {slide.cta}
+                        </div>
+                      </Link>
+                    )}
                     <Link to="/live-auction" className="inline-flex">
                       <div className="bg-gradient-to-r from-[#056160] to-[#044c4c] text-white px-8 py-3 rounded-full font-bold shadow-xl hover:from-[#044c4c] hover:to-slate-900 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
                         Join Live Auction
@@ -247,8 +249,8 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_20px_60px_rgba(212,165,116,0.2)] bg-white w-full max-w-[480px]"
-                    style={{ aspectRatio: '3 / 2' }}>
+                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_20px_60px_rgba(212,165,116,0.2)] bg-white w-full max-w-[440px]"
+                    style={{ aspectRatio: '1 / 1' }}>
                     <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
                   </div>
                 </div>
@@ -563,9 +565,21 @@ const LandingPage: React.FC = () => {
           {/* Scheme Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {schemes.map((scheme, idx) => (
-              <div key={idx} className="group bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl border border-[#D4A574]">
-                <div className="h-80 md:h-[450px] bg-blue-100 relative overflow-hidden">
-                  <img src={scheme.image} alt={scheme.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
+              <div
+                key={idx}
+                onClick={() => openApplyModal(`${scheme.title} - ${scheme.amount}`)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openApplyModal(`${scheme.title} - ${scheme.amount}`);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                className="group w-full bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl border border-[#D4A574] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#D4A574]/40"
+              >
+                <div className="aspect-[4/3] bg-blue-100 relative overflow-hidden">
+                  <img src={scheme.image} alt={scheme.title} className="w-full h-full object-cover object-center" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#044c4c]/80 via-transparent to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-bold text-white mb-2">{scheme.title}</h3>

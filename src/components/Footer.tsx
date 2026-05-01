@@ -13,12 +13,12 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-6">
-              <div className="relative h-10 w-auto overflow-visible flex items-center justify-center mr-4 bg-transparent p-0 m-0">
+              <div className="relative h-24 w-36 overflow-visible flex items-center justify-center mr-4 bg-transparent p-0 m-0">
                 <img
                   src={logoSrc}
                   alt="NovaTrust Logo"
-                  className="h-10 w-auto object-contain bg-transparent"
-                  style={{ maxHeight: '48px', background: 'transparent' }}
+                  className="h-24 w-auto object-contain bg-transparent"
+                  style={{ maxHeight: '96px', background: 'transparent' }}
                 />
               </div>
               <h3 className="text-2xl font-bold text-[#D4A574] tracking-wider">NOVATRUST CHITS</h3>

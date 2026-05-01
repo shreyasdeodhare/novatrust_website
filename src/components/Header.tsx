@@ -21,12 +21,12 @@ const Header: React.FC = () => {
       <div className="w-full h-full flex flex-row items-center justify-between px-4">
         {/* Logo and Nav in one row for desktop */}
         <div className="flex flex-row items-center h-full">
-          <div className="flex items-center h-full bg-transparent p-0 m-0" style={{ height: '56px', minWidth: '120px' }}>
+          <div className="flex items-center h-full bg-transparent p-0 m-0" style={{ height: '64px', minWidth: '170px' }}>
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="h-14 w-auto object-contain bg-transparent"
-              style={{ maxHeight: '56px', background: 'transparent', minWidth: '100px' }}
+              className="h-28 w-auto object-contain bg-transparent"
+              style={{ background: 'transparent', minWidth: '150px' }}
             />
           </div>
           {/* Desktop Navigation (right of logo) */}
