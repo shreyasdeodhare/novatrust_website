@@ -18,15 +18,15 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 text-white shadow-lg border-b border-[#4d818c]" style={{ background: '#4d818c', height: '64px' }}>
-      <div className="w-full h-full flex flex-row items-center justify-between px-4">
+      <div className="w-full h-full flex flex-row items-center justify-between px-2 sm:px-4">
         {/* Logo and Nav in one row for desktop */}
-        <div className="flex flex-row items-center h-full">
-          <div className="flex items-center h-full bg-transparent p-0 m-0" style={{ height: '64px', minWidth: '170px' }}>
+        <div className="flex flex-row items-center h-full flex-shrink-0">
+          <div className="flex items-center h-full bg-transparent p-0 m-0 w-24 sm:w-32 lg:w-auto" style={{ height: '64px', minWidth: 'auto' }}>
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="h-28 w-auto object-contain bg-transparent"
-              style={{ background: 'transparent', minWidth: '150px' }}
+              className="h-20 sm:h-24 lg:h-28 w-auto object-contain bg-transparent"
+              style={{ background: 'transparent' }}
             />
           </div>
           {/* Desktop Navigation (right of logo) */}
@@ -42,8 +42,8 @@ const Header: React.FC = () => {
           </nav>
         </div>
         {/* Call Button aligned right, fill space */}
-        <div className="flex flex-1 flex-row items-center justify-end gap-4">
-          <a href="tel:7755996577" className="flex items-center bg-white text-[#039be5] font-bold rounded-full px-6 py-2 shadow hover:bg-[#ffd600] hover:text-[#039be5] transition text-lg" style={{ minWidth: '200px' }}>
+        <div className="flex flex-1 min-w-0 flex-row items-center justify-end gap-2 lg:gap-4">
+          <a href="tel:7755996577" className="flex items-center justify-center bg-white text-[#039be5] font-bold rounded-full px-3 sm:px-6 py-2 shadow hover:bg-[#ffd600] hover:text-[#039be5] transition text-base sm:text-lg" style={{ minWidth: '150px' }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2">
               <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" />
             </svg>
@@ -53,7 +53,7 @@ const Header: React.FC = () => {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-[#ffd600] bg-white p-2 text-[#039be5] shadow-sm transition hover:bg-[#ffd600] hover:text-[#039be5] focus:outline-none focus:ring-2 focus:ring-[#ffd600] lg:hidden ml-2"
+          className="inline-flex flex-shrink-0 items-center justify-center rounded-full border border-[#ffd600] bg-white p-2 text-[#039be5] shadow-sm transition hover:bg-[#ffd600] hover:text-[#039be5] focus:outline-none focus:ring-2 focus:ring-[#ffd600] lg:hidden ml-1"
           onClick={handleToggle}
           aria-expanded={isOpen}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}

@@ -209,31 +209,31 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen flex flex-col font-sans bg-brand-surface relative overflow-hidden">
       <Header />
       {/* Hero Carousel Section */}
-      <section id="hero" className="relative overflow-hidden min-h-[500px] pt-32 lg:pt-40 pb-10 lg:pb-16 bg-[#ecfdf5]">
+      <section id="hero" className="relative overflow-hidden min-h-[720px] md:min-h-[500px] pt-24 md:pt-32 lg:pt-40 pb-10 lg:pb-16 bg-[#ecfdf5]">
         <div className="absolute inset-0 bg-[#ecfdf5] opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-100/95 via-slate-100/70 to-blue-50/50"></div>
 
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto px-4 min-h-[500px] overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-4 min-h-[640px] md:min-h-[500px] overflow-hidden">
           {heroSlides.map((slide, index) => (
             <div
               key={index}
               className={`absolute inset-0 transition-opacity duration-1000 will-change-opacity ${index === currentSlide ? 'opacity-100' : 'opacity-0'
                 }`}
             >
-              <div className="w-full min-h-[500px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-8 py-8 transform-gpu">
-                <div className="md:w-1/2 mb-6 md:mb-0 text-center md:text-left">
-                  <div className="inline-block rounded-full px-6 py-2 mb-4 bg-[#056160]/10 border border-[#D4A574] shadow-sm">
+              <div className="w-full min-h-[640px] md:min-h-[500px] flex flex-col lg:flex-row items-center justify-center relative z-10 gap-4 lg:gap-8 py-4 md:py-8 transform-gpu">
+                <div className="md:w-1/2 mb-2 md:mb-0 text-center md:text-left">
+                  <div className="inline-block rounded-full px-4 md:px-6 py-2 mb-3 md:mb-4 bg-[#056160]/10 border border-[#D4A574] shadow-sm">
                     <span className="text-sm font-semibold text-[#056160]">🚀 Most Trusted Chit Fund Platform</span>
                   </div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 leading-tight bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">
                     {slide.title}
                   </h1>
-                  <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-[#056160]">
+                  <h2 className="text-xl md:text-3xl font-semibold mb-2 md:mb-3 text-[#056160]">
                     {slide.subtitle}
                   </h2>
-                  <p className="text-lg mb-6 text-[#056160] font-medium line-clamp-2 md:line-clmap-none">{slide.description}</p>
-                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                  <p className="text-base md:text-lg mb-4 md:mb-6 text-[#056160] font-medium line-clamp-2 md:line-clmap-none">{slide.description}</p>
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-2 md:mb-4">
                     {slide.cta && (
                       <Link to="/calculator" className="inline-flex">
                         <div className="bg-white text-[#056160] px-8 py-3 rounded-full font-bold shadow-xl hover:bg-yellow-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
@@ -249,7 +249,7 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">
-                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_20px_60px_rgba(212,165,116,0.2)] bg-white w-full max-w-[440px]"
+                  <div className="overflow-hidden rounded-3xl border-4 border-[#D4A574] ring-1 ring-yellow-200 shadow-[0_20px_60px_rgba(212,165,116,0.2)] bg-white w-full max-w-[260px] md:max-w-[360px] lg:max-w-[440px]"
                     style={{ aspectRatio: '1 / 1' }}>
                     <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
                   </div>
