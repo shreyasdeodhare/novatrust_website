@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage';
 import TermsPage from './pages/TermsPage';
 import LiveAuctionPage from './pages/LiveAuctionPage';
 import BenefitsPage from './pages/BenefitsPage';
+import BecomeAgentPage from './pages/BecomeAgentPage';
 
 // Styles
 import './styles/index.css';
@@ -30,6 +31,7 @@ const App: React.FC = () => {
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/live-auction" element={<LiveAuctionPage />} />
           <Route path="/benefits" element={<BenefitsPage />} />
+          <Route path="/become-agent" element={<BecomeAgentPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/terms" element={<TermsPage />} />
         

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaGavel, FaHandHoldingUsd, FaPercentage, FaRupeeSign, FaUsers } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -59,6 +60,48 @@ const features = [
   { icon: '🤝', title: 'Trustworthy', desc: 'Your financial dreams, our trusted commitment.' },
   { icon: '📈', title: 'Growth', desc: 'Grow your savings with flexible plans.' },
   { icon: '🔒', title: 'Secure', desc: 'Your money is safe with us.' },
+];
+
+const chitProcessSteps = [
+  {
+    title: '50 Members',
+    detail: 'Members contribute Rs. 10K each month',
+    value: '50',
+    Icon: FaUsers,
+  },
+  {
+    title: 'Monthly Pooling',
+    detail: '50 x Rs. 10K creates the chit pool',
+    value: '5 Lakhs',
+    Icon: FaRupeeSign,
+  },
+  {
+    title: 'Auction',
+    detail: 'Highest discount bid wins the auction',
+    value: '30%',
+    Icon: FaGavel,
+  },
+];
+
+const chitPayouts = [
+  {
+    label: 'Foreman Commission',
+    detail: '5% of Rs. 5 Lac',
+    value: '25K',
+    Icon: FaRupeeSign,
+  },
+  {
+    label: 'Dividend',
+    detail: 'Rs. 1.25 Lac shared by 50 members',
+    value: 'Rs. 2,500 / person',
+    Icon: FaPercentage,
+  },
+  {
+    label: 'Prize Money',
+    detail: 'Rs. 5 Lac minus 30% discount',
+    value: '3.5 Lac',
+    Icon: FaHandHoldingUsd,
+  },
 ];
 
 const LandingPage: React.FC = () => {
@@ -235,7 +278,7 @@ const LandingPage: React.FC = () => {
                   <p className="text-base md:text-lg mb-4 md:mb-6 text-[#056160] font-medium line-clamp-2 md:line-clmap-none">{slide.description}</p>
                   <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-2 md:mb-4">
                     {slide.cta && (
-                      <Link to="/calculator" className="inline-flex">
+                      <Link to={slide.title === 'Become Our Agent' ? '/become-agent' : '/calculator'} className="inline-flex">
                         <div className="bg-white text-[#056160] px-8 py-3 rounded-full font-bold shadow-xl hover:bg-yellow-50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
                           {slide.cta}
                         </div>
@@ -484,84 +527,6 @@ const LandingPage: React.FC = () => {
         <div className="px-4">
           <h2 className="text-4xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent mb-12 text-center">Our Chit Fund Schemes</h2>
 
-          {/* Schemes Table */}
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12 transform hover:scale-105 transition-transform duration-300 border border-[#D4A574]">
-            <div className="px-8 py-10">
-              <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">Available Chit Fund Schemes</h3>
-
-              <div className="overflow-x-auto rounded-2xl shadow-lg border border-[#D4A574]">
-                <table className="min-w-full border-collapse overflow-hidden">
-                  <thead className="bg-[#056160] text-white">
-                    <tr>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-[#D4A574]">
-                        💰 MONTHLY SUBSCRIPTION
-                      </th>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-[#D4A574] border-l border-[#044c4c]/50">
-                        ⏰ DURATION (MONTHS)
-                      </th>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-[#D4A574] border-l border-[#044c4c]/50">
-                        🎯 FUND VALUE
-                      </th>
-                      <th className="text-center py-5 md:py-6 px-4 md:px-8 font-bold text-lg md:text-xl tracking-wide border-b-2 border-[#D4A574] border-l border-[#044c4c]/50">
-                        ⚡ ACTION
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="bg-gradient-to-r from-blue-50 to-slate-50 hover:from-blue-100 hover:to-slate-100 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹5,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">20</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹1,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Basic Chit Fund - ₹1,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                    <tr className="bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-slate-50 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹8,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">25</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹2,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Standard Chit Fund - ₹2,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                    <tr className="bg-gradient-to-r from-blue-50 to-slate-50 hover:from-blue-100 hover:to-slate-100 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹10,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">30</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹3,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Premium Chit Fund - ₹3,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                    <tr className="bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-slate-50 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹12,500</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">40</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹5,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Gold Chit Fund - ₹5,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                    <tr className="bg-gradient-to-r from-blue-50 to-slate-50 hover:from-blue-100 hover:to-slate-100 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹20,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">25</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹5,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Platinum Chit Fund - ₹5,00,000')} className="bg-gradient-to-r from-amber-400 to-yellow-500 text-teal-950 font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-amber-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                    <tr className="bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-slate-50 transition-all duration-300 transform hover:scale-105">
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹20,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold text-gray-800">50</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8 text-xl md:text-3xl font-bold bg-gradient-to-r from-[#056160] to-[#044c4c] bg-clip-text text-transparent">₹10,00,000</td>
-                      <td className="text-center py-4 md:py-8 px-4 md:px-8">
-                        <button onClick={() => openApplyModal('Diamond Chit Fund - ₹10,00,000')} className="bg-gradient-to-r from-[#D4A574] to-yellow-500 text-[#056160] font-bold px-4 md:px-6 py-2 md:py-3 rounded-full hover:scale-105 transition-all shadow-md shadow-yellow-500/20">Apply Now</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
           {/* Scheme Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {schemes.map((scheme, idx) => (
@@ -593,6 +558,70 @@ const LandingPage: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Chit Process Chart */}
+          <div className="mt-12 overflow-hidden rounded-3xl border border-[#D4A574]/70 bg-[#056160] p-5 shadow-2xl md:p-10">
+            <div className="mx-auto max-w-7xl text-white">
+              <div className="mb-10 text-center">
+                <h3 className="text-3xl font-bold md:text-5xl">The Chit Cycle or The Chit Process</h3>
+                <p className="mx-auto mt-4 max-w-4xl rounded-2xl bg-white/10 px-5 py-3 text-sm font-semibold text-white/90 md:text-base">
+                  Example: Chit value Rs. 5 Lac | 50 members | 50 months | Auction discount 30%
+                </p>
+              </div>
+
+              <div className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
+                {chitProcessSteps.map(({ title, detail, value, Icon }, index) => (
+                  <div key={title} className="relative">
+                    <div className="h-full rounded-2xl border border-white/20 bg-white/10 p-5 shadow-xl">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-amber-300 text-2xl text-amber-200">
+                          <Icon />
+                        </div>
+                        <div>
+                          <p className="text-3xl font-black text-amber-300">{value}</p>
+                          <h4 className="text-xl font-bold">{title}</h4>
+                        </div>
+                      </div>
+                      <p className="mt-4 text-sm font-medium leading-relaxed text-white/85">{detail}</p>
+                    </div>
+                    {index < chitProcessSteps.length - 1 && (
+                      <div className="absolute left-1/2 top-full h-5 border-l-2 border-dashed border-amber-200/70 lg:left-full lg:top-1/2 lg:h-0 lg:w-5 lg:border-l-0 lg:border-t-2" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 rounded-2xl border border-amber-300/40 bg-[#044c4c] p-5 md:p-7">
+                <div className="mb-6 text-center">
+                  <p className="text-sm font-semibold uppercase tracking-wide text-amber-200">Distribution after auction</p>
+                  <h4 className="mt-2 text-2xl font-bold">Rs. 5 Lac pool is split accurately</h4>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-3">
+                  {chitPayouts.map(({ label, detail, value, Icon }) => (
+                    <div key={label} className="rounded-2xl border border-white/15 bg-white/10 p-5 text-center">
+                      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-amber-300 text-xl text-amber-200">
+                        <Icon />
+                      </div>
+                      <h5 className="text-lg font-bold text-white">{label}</h5>
+                      <p className="mt-2 text-2xl font-black text-amber-300">{value}</p>
+                      <p className="mt-2 text-sm font-medium text-white/80">{detail}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 grid gap-3 text-sm font-semibold text-white/90 md:grid-cols-3">
+                  <div className="rounded-xl bg-white/10 px-4 py-3">Discount: 30% of Rs. 5 Lac = Rs. 1.5 Lac</div>
+                  <div className="rounded-xl bg-white/10 px-4 py-3">Dividend pool: Rs. 1.5 Lac - Rs. 25K = Rs. 1.25 Lac</div>
+                  <div className="rounded-xl bg-white/10 px-4 py-3">Prize money: Rs. 5 Lac - Rs. 1.5 Lac = Rs. 3.5 Lac</div>
+                </div>
+              </div>
+
+              <div className="mt-8 rounded-2xl bg-white/15 px-5 py-4 text-center text-sm font-medium text-white/90">
+                Note: The first month's pooled chit amount is retained by the foreman. From the second month onward, the pool, auction, and distribution cycle repeats monthly.
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1056,6 +1085,14 @@ const LandingPage: React.FC = () => {
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Phone Number</label>
                   <input type="tel" name="phone" required className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all placeholder-gray-400" placeholder="+91 XXXXX XXXXX" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Purpose of Joining</label>
+                  <select name="Purpose_of_Joining" required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#056160] focus:border-[#056160] outline-none transition-all text-gray-700 bg-white">
+                    <option value="" disabled>Select purpose</option>
+                    <option value="Borrowing">Borrowing</option>
+                    <option value="Saving and Returns">Saving and Returns</option>
+                  </select>
                 </div>
                 <button type="submit" className="w-full bg-gradient-to-r from-[#056160] to-teal-800 hover:to-teal-900 text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mt-4">
                   Submit Application

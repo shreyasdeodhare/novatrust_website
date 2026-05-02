@@ -21,11 +21,11 @@ const Header: React.FC = () => {
       <div className="w-full h-full flex flex-row items-center justify-between px-2 sm:px-4">
         {/* Logo and Nav in one row for desktop */}
         <div className="flex flex-row items-center h-full flex-shrink-0">
-          <div className="flex items-center h-full bg-transparent p-0 m-0 w-24 sm:w-32 lg:w-auto" style={{ height: '64px', minWidth: 'auto' }}>
+          <div className="flex items-center h-full bg-transparent p-0 m-0 w-28 sm:w-36 lg:w-auto" style={{ height: '64px', minWidth: 'auto' }}>
             <img
               src={logoSrc}
               alt="NovaTrust Logo"
-              className="h-20 sm:h-24 lg:h-28 w-auto object-contain bg-transparent"
+              className="h-24 sm:h-28 lg:h-32 w-auto object-contain bg-transparent"
               style={{ background: 'transparent' }}
             />
           </div>
@@ -37,6 +37,7 @@ const Header: React.FC = () => {
             <Link to="/calculator" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Calculator</Link>
             <Link to="/live-auction" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Live Auction</Link>
             <Link to="/benefits" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Benefits</Link>
+            <Link to="/become-agent" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Become an Agent</Link>
             <Link to="/terms" onClick={handleLinkClick} className="text-white font-semibold hover:text-[#ffd600] transition">Terms</Link>
             <Link to="/contact" onClick={handleLinkClick} className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#4d818c] shadow-lg hover:bg-[#ffd600] hover:text-[#4d818c] transition">Contact</Link>
           </nav>
@@ -83,6 +84,7 @@ const Header: React.FC = () => {
           <Link to="/calculator" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white font-semibold hover:bg-slate-800 transition">Calculator</Link>
           <Link to="/live-auction" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white font-semibold hover:bg-slate-800 transition">Live Auction</Link>
           <Link to="/benefits" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white font-semibold hover:bg-slate-800 transition">Benefits</Link>
+          <Link to="/become-agent" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white font-semibold hover:bg-slate-800 transition">Become an Agent</Link>
           <Link to="/terms" onClick={handleLinkClick} className="block rounded-xl px-4 py-3 text-white font-semibold hover:bg-slate-800 transition">Terms</Link>
           <Link to="/contact" onClick={handleLinkClick} className="block rounded-full bg-[#D4A574] px-5 py-3 text-center text-sm font-semibold text-[#056160] shadow-lg hover:bg-[#c29466] transition">Contact</Link>
         </div>
